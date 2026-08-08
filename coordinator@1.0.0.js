@@ -15,6 +15,10 @@
       stacks[side] += size + GAP;
       zCounter += 10;
       return { bottom: bottom, zIndex: zCounter };
+    },
+    // returns the top edge of the entire button stack — use for panel positioning
+    getStackTop: function (side) {
+      return stacks[(side || 'left')];
     }
   };
 })();

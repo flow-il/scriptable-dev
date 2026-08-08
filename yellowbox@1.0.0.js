@@ -61,7 +61,15 @@
     });
     document.getElementById('cp-toggle').addEventListener('click', () => {
       const w = document.getElementById('cp-window');
-      w.style.display = w.style.display === 'none' ? 'flex' : 'none';
+      if (w.style.display === 'none') {
+        w.style.display = 'flex';
+        document.dispatchEvent(new CustomEvent('ybwidget:open', { detail: { id: 'chat' } }));
+      } else {
+        w.style.display = 'none';
+      }
+    });
+    document.addEventListener('ybwidget:open', function (e) {
+      if (e.detail.id !== 'chat') { const w = document.getElementById('cp-window'); if (w) w.style.display = 'none'; }
     });
     document.getElementById('cp-send').addEventListener('click', sendMessage);
     document.getElementById('cp-input').addEventListener('keydown', (e) => {

@@ -95,10 +95,15 @@
     document.body.appendChild(panel);
     btn.style.bottom = pos.bottom + 'px';
     btn.style.zIndex = pos.zIndex;
-    panel.style.bottom = (pos.bottom + 56 + 10) + 'px'; // 56=btn height, 10=gap above
+    const panelBottom = window.YBCoordinator ? window.YBCoordinator.getStackTop('left') + 8 : pos.bottom + 56 + 10;
+    panel.style.bottom = panelBottom + 'px';
     panel.style.zIndex = pos.zIndex + 1;
 
-    btn.addEventListener('click', () => { panel.hidden = !panel.hidden; });
+    btn.addEventListener('click', () => {
+      panel.hidden = !panel.hidden;
+      if (!panel.hidden) document.dispatchEvent(new CustomEvent('ybwidget:open', { detail: { id: 'a11y' } }));
+    });
+    document.addEventListener('ybwidget:open', function (e) { if (e.detail.id !== 'a11y') panel.hidden = true; });
 
     panel.querySelectorAll('[data-size]').forEach(b => {
       if (parseInt(b.dataset.size) === state.fontSize) b.classList.add('active');
