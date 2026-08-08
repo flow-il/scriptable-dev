@@ -4,9 +4,13 @@
   const YB = '#f7ec0c';    // YellowBox primary color — לשינוי מקום אחד בלבד
   const YB_TEXT = '#111';  // טקסט על רקע צהוב
 
+  const pos = window.YBCoordinator
+    ? window.YBCoordinator.register('chat', { side: 'left', size: 56 })
+    : { bottom: 24, zIndex: 99999 };
+
   const style = document.createElement('style');
   style.textContent = `
-    #cp-widget { position: fixed; bottom: 24px; left: 24px; z-index: 99999; font-family: system-ui, sans-serif; direction: rtl; }
+    #cp-widget { position: fixed; left: 24px; font-family: system-ui, sans-serif; direction: rtl; }
     #cp-toggle { width: 56px; height: 56px; border-radius: 50%; background: ${YB}; color: ${YB_TEXT}; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(247,236,12,.4); transition: transform .2s; }
     #cp-toggle:hover { transform: scale(1.08); }
     #cp-window { position: absolute; bottom: 70px; left: 0; width: 320px; height: 420px; background: #fff; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.15); display: flex; flex-direction: column; overflow: hidden; }
@@ -49,6 +53,8 @@
         <a id="cp-version" href="https://yellowbox.co.il" target="_blank" rel="noopener">YellowBox@1.0.0</a>
       </div>`;
     document.body.appendChild(el);
+    el.style.bottom = pos.bottom + 'px';
+    el.style.zIndex = pos.zIndex;
 
     document.getElementById('cp-close').addEventListener('click', () => {
       document.getElementById('cp-window').style.display = 'none';
