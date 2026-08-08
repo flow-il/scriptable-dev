@@ -25,9 +25,10 @@
   function injectStyles() {
     const s = document.createElement('style');
     s.textContent = `
-      html.a11y-font-lg  * { font-size: 110% !important; }
-      html.a11y-font-xl  * { font-size: 125% !important; }
-      html.a11y-font-xxl * { font-size: 150% !important; }
+      html.a11y-font-lg  { font-size: 110% !important; }
+      html.a11y-font-xl  { font-size: 125% !important; }
+      html.a11y-font-xxl { font-size: 150% !important; }
+      #a11y-btn, #a11y-panel, #a11y-panel * { font-size: 13px !important; line-height: 1.5 !important; }
       html.a11y-high-contrast { filter: contrast(150%); background: #000 !important; color: #ff0 !important; }
       html.a11y-inverted { filter: invert(100%) hue-rotate(180deg); }
       html.a11y-grayscale { filter: grayscale(100%); }
@@ -37,7 +38,7 @@
 
       #a11y-btn { position: fixed; left: 24px; width: 56px; height: 56px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.3); transition: transform .2s; display: flex; align-items: center; justify-content: center; }
       #a11y-btn:hover { transform: scale(1.08); }
-      #a11y-panel { position: fixed; left: 24px; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,.2); padding: 16px; width: 220px; direction: rtl; }
+      #a11y-panel { position: fixed; left: 24px; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,.2); padding: 16px; width: 220px; direction: rtl; max-height: calc(100vh - 200px); overflow-y: auto; }
       #a11y-panel h3 { font-size: 13px; color: #333; margin-bottom: 12px; font-family: sans-serif; }
       .a11y-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 13px; font-family: sans-serif; color: #444; }
       .a11y-toggle { position: relative; width: 38px; height: 20px; }
@@ -49,7 +50,7 @@
       .a11y-font-btns { display: flex; gap: 4px; }
       .a11y-font-btns button { padding: 3px 8px; font-size: 11px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; background: #f5f5f5; }
       .a11y-font-btns button.active { background: #0084ff; color: #fff; border-color: #0084ff; }
-      .a11y-reset { width: 100%; padding: 6px; font-size: 12px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; background: #f5f5f5; margin-top: 4px; font-family: sans-serif; }
+      .a11y-reset { width: 100%; padding: 8px; font-size: 12px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; background: #fff; margin-top: 8px; font-family: sans-serif; position: sticky; bottom: 0; border-top: 1px solid #eee; }
       .a11y-version { display: block; text-align: center; font-size: 10px; color: #bbb; margin-top: 8px; font-family: sans-serif; text-decoration: none; }
       .a11y-version:hover { color: #888; }
     `;
