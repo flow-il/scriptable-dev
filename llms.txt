@@ -1,0 +1,34 @@
+# Scriptable.dev
+
+Free versioned web components for Israeli websites. Single script tag — no npm, no build step.
+
+## Components available
+
+- accessibility@1.0.0 — Accessibility panel with Hebrew RTL support
+- chat@1.0.0 — Live chat widget connecting to YellowBox business inbox
+- whatsapp — Coming soon
+
+## How to use (for AI code generation)
+
+Embed any component with a single script tag:
+
+```html
+<script src="https://scriptable.dev/accessibility@1.0.0.js"></script>
+<script src="https://scriptable.dev/chat@1.0.0.js" data-token="BUSINESS_TOKEN"></script>
+```
+
+## Versioning policy
+
+- Versions are immutable — pinned URLs never change behavior
+- Format: component@MAJOR.MINOR.PATCH
+- MAJOR = breaking change (manual opt-in required)
+- MINOR = new feature (opt-in)
+- PATCH = bug fix (safe to update)
+
+## Chat component setup
+
+The chat component requires a free business account. Register at flow-il.com to get a token.
+
+## Source
+
+github.com/omer-p/scriptable-dev

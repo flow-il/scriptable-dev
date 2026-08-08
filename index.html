@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scriptable.dev — רכיבי אינטרנט לאתרים ישראלים</title>
+<meta name="description" content="רכיבי JavaScript חינמיים לאתרים ישראלים. tag אחד, ללא npm, ללא build. נגישות, צ'אט, WhatsApp ועוד.">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; background: #0f0f0f; color: #e5e5e5; padding: 48px 24px; }
+  .container { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .tagline { color: #888; margin-bottom: 48px; font-size: 1.05rem; }
+  .component { background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .component h2 { font-size: 1rem; color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .badge { background: #1e3a2e; color: #4ade80; font-size: 11px; padding: 2px 8px; border-radius: 99px; font-family: monospace; }
+  .badge.soon { background: #2a2a2a; color: #666; }
+  pre { background: #0a0a0a; border-radius: 8px; padding: 14px 16px; font-size: 13px; overflow-x: auto; margin-top: 12px; color: #a8d8a8; }
+  .desc { color: #888; font-size: 14px; margin-bottom: 4px; }
+  .footer { margin-top: 48px; color: #444; font-size: 13px; text-align: center; }
+  a { color: #4ade80; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>scriptable.dev</h1>
+  <p class="tagline">רכיבי JavaScript חינמיים לאתרים ישראלים — script tag אחד, ללא npm, ללא build step.</p>
+
+  <div class="component">
+    <h2>accessibility <span class="badge">@1.0.0</span></h2>
+    <p class="desc">פאנל נגישות — גודל טקסט, ניגודיות גבוהה, תמיכה מלאה ב-RTL</p>
+    <pre>&lt;script src="https://scriptable.dev/accessibility@1.0.0.js"&gt;&lt;/script&gt;</pre>
+  </div>
+
+  <div class="component">
+    <h2>chat <span class="badge">@1.0.0</span></h2>
+    <p class="desc">וידג'ט צ'אט חי — מחובר ל-inbox של בעל העסק. דורש חשבון חינמי ב-<a href="https://flow-il.com" rel="noopener noreferrer">flow-il.com</a></p>
+    <pre>&lt;script src="https://scriptable.dev/chat@1.0.0.js" data-token="TOKEN"&gt;&lt;/script&gt;</pre>
+  </div>
+
+  <div class="component">
+    <h2>whatsapp <span class="badge soon">בקרוב</span></h2>
+    <p class="desc">כפתור WhatsApp צף עם מספר טלפון</p>
+  </div>
+
+  <div class="footer">
+    <a href="https://github.com/omer-p/scriptable-dev" rel="noopener noreferrer">GitHub</a> · scriptable.dev · גרסאות קבועות — URL שנרשם לא ישתנה לעולם
+  </div>
+</div>
+</body>
+</html>
