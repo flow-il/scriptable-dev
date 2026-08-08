@@ -4,6 +4,9 @@
   const STORAGE_KEY = 'a11y';
   const defaults = { fontSize: 0, highContrast: false, inverted: false, grayscale: false, underlineLinks: false, noAnimations: false, readableFont: false };
   let state = Object.assign({}, defaults, JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'));
+  const pos = window.YBCoordinator
+    ? window.YBCoordinator.register('a11y', { side: 'left', size: 44 })
+    : { bottom: 80, zIndex: 99998 };
 
   function applyState() {
     const h = document.documentElement;
@@ -32,8 +35,8 @@
       html.a11y-no-animations *, html.a11y-no-animations *::before, html.a11y-no-animations *::after { animation: none !important; transition: none !important; }
       html.a11y-readable-font * { font-family: Arial, sans-serif !important; letter-spacing: .04em !important; line-height: 1.7 !important; }
 
-      #a11y-btn { position: fixed; bottom: 80px; left: 16px; z-index: 99998; width: 44px; height: 44px; border-radius: 50%; background: #333; color: #fff; border: none; font-size: 20px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
-      #a11y-panel { position: fixed; bottom: 134px; left: 16px; z-index: 99999; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,.2); padding: 16px; width: 220px; direction: rtl; }
+      #a11y-btn { position: fixed; left: 24px; width: 44px; height: 44px; border-radius: 50%; background: #333; color: #fff; border: none; font-size: 20px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+      #a11y-panel { position: fixed; left: 24px; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,.2); padding: 16px; width: 220px; direction: rtl; }
       #a11y-panel h3 { font-size: 13px; color: #333; margin-bottom: 12px; font-family: sans-serif; }
       .a11y-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 13px; font-family: sans-serif; color: #444; }
       .a11y-toggle { position: relative; width: 38px; height: 20px; }
@@ -89,6 +92,10 @@
 
     document.body.appendChild(btn);
     document.body.appendChild(panel);
+    btn.style.bottom = pos.bottom + 'px';
+    btn.style.zIndex = pos.zIndex;
+    panel.style.bottom = (pos.bottom + 44 + 10) + 'px'; // 44=btn height, 10=gap above
+    panel.style.zIndex = pos.zIndex + 1;
 
     btn.addEventListener('click', () => { panel.hidden = !panel.hidden; });
 
