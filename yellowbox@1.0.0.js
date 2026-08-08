@@ -21,7 +21,7 @@
     #cp-input { flex: 1; padding: 9px 12px; border: 1px solid #ddd; border-radius: 24px; font-size: 14px; outline: none; }
     #cp-send { padding: 9px 16px; background: ${YB}; color: ${YB_TEXT}; border: none; border-radius: 24px; cursor: pointer; font-size: 14px; }
     #cp-version { display: block; text-align: center; font-size: 10px; color: #ccc; padding: 4px 0 6px; font-family: sans-serif; text-decoration: none; }
-    #cp-version:hover { color: #aaa; }
+    #cp-version:hover { color: #888; }
   `;
   document.head.appendChild(style);
 
@@ -46,7 +46,7 @@
           <input id="cp-input" type="text" placeholder="כתוב הודעה..." autocomplete="off" />
           <button id="cp-send">שלח</button>
         </div>
-        <a id="cp-version" href="https://scriptable.dev/chat/" target="_blank" rel="noopener">chat@1.0.0 · scriptable.dev</a>
+        <a id="cp-version" href="https://yellowbox.co.il" target="_blank" rel="noopener">YellowBox@1.0.0</a>
       </div>`;
     document.body.appendChild(el);
 
