@@ -11,7 +11,7 @@
   const style = document.createElement('style');
   style.textContent = `
     #cp-widget { position: fixed; left: 24px; font-family: system-ui, sans-serif; direction: rtl; }
-    #cp-toggle { width: 56px; height: 56px; border-radius: 50%; background: ${YB}; color: ${YB_TEXT}; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(247,236,12,.4); transition: transform .2s; }
+    #cp-toggle { width: 56px; height: 56px; border-radius: 50%; background: ${YB}; color: ${YB_TEXT}; border: none; cursor: pointer; box-shadow: 0 4px 16px rgba(247,236,12,.4); transition: transform .2s; display: flex; align-items: center; justify-content: center; }
     #cp-toggle:hover { transform: scale(1.08); }
     #cp-window { position: absolute; bottom: 70px; left: 0; width: 320px; height: 420px; background: #fff; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.15); display: flex; flex-direction: column; overflow: hidden; }
     #cp-header { background: ${YB}; color: ${YB_TEXT}; padding: 14px 16px; font-weight: 600; font-size: 15px; display: flex; justify-content: space-between; align-items: center; }
@@ -42,7 +42,7 @@
     const el = document.createElement('div');
     el.id = 'cp-widget';
     el.innerHTML = `
-      <button id="cp-toggle" title="צ'אט עם ${siteName}">💬</button>
+      <button id="cp-toggle" title="צ'אט עם ${siteName}"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
       <div id="cp-window" style="display:none">
         <div id="cp-header"><span>${siteName}</span><button id="cp-close">✕</button></div>
         <div id="cp-messages"></div>
