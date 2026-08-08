@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify required files exist
+        run: |
+          test -f index.html
+          test -f robots.txt
+          test -f sitemap.xml
+          test -f vercel.json
+          test -f accessibility@1.0.0.js
+          test -f chat@1.0.0.js
+          echo "All required files present"
+      - name: Check no secrets in JS components
+        run: |
+          ! grep -r "TELEGRAM_BOT_TOKEN\|DATABASE_URL\|ADMIN_SECRET" *.js || (echo "Secret found in component!" && exit 1)
