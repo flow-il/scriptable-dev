@@ -105,7 +105,9 @@
     <section>
       <h2>התקנה</h2>
       <div class="code-wrap">
-        <pre id="code-install">&lt;script src="https://scriptable.dev/chat@1.0.0.js" data-token="YOUR_TOKEN"&gt;&lt;/script&gt;</pre>
+        <pre id="code-install">&lt;script src="https://scriptable.dev/chat@1.0.0.js"
+        data-token="YOUR_TOKEN"
+        data-platform="https://YOUR_PLATFORM.railway.app"&gt;&lt;/script&gt;</pre>
         <button class="copy-btn" onclick="copy('code-install', this)">העתק</button>
       </div>
     </section>
@@ -125,6 +127,7 @@
       <table>
         <tr><th>שם</th><th>חובה?</th><th>תיאור</th></tr>
         <tr><td>data-token</td><td><span class="req">●</span> חובה</td><td>Widget token מחשבון flow-il.com</td></tr>
+        <tr><td>data-platform</td><td><span class="req">●</span> חובה</td><td>URL של שרת הפלטפורמה (Railway deployment URL)</td></tr>
       </table>
     </section>
 
