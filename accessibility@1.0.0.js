@@ -36,23 +36,30 @@
       html.a11y-no-animations *, html.a11y-no-animations *::before, html.a11y-no-animations *::after { animation: none !important; transition: none !important; }
       html.a11y-readable-font * { font-family: Arial, sans-serif !important; letter-spacing: .04em !important; line-height: 1.7 !important; }
 
-      #a11y-btn { position: fixed; left: 24px; width: 56px; height: 56px; border-radius: 50%; background: #333; color: #fff; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.3); transition: transform .2s; display: flex; align-items: center; justify-content: center; }
+      #a11y-btn { position: fixed; left: 24px; width: 56px; height: 56px; border-radius: 50%; background: #1a1a1a; color: #fff; border: none; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.35); transition: transform .2s; display: flex; align-items: center; justify-content: center; }
       #a11y-btn:hover { transform: scale(1.08); }
-      #a11y-panel { position: fixed; left: 24px; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,.2); padding: 16px; width: 220px; direction: rtl; max-height: calc(100vh - 200px); overflow-y: auto; }
-      #a11y-panel h3 { font-size: 13px; color: #333; margin-bottom: 12px; font-family: sans-serif; }
-      .a11y-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 13px; font-family: sans-serif; color: #444; }
-      .a11y-toggle { position: relative; width: 38px; height: 20px; }
+      #a11y-panel { position: fixed; left: 24px; background: #fff; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,.18); width: 260px; direction: rtl; max-height: calc(100vh - 200px); overflow-y: auto; font-family: system-ui, -apple-system, sans-serif; }
+      #a11y-header { background: #1a1a1a; border-radius: 16px 16px 0 0; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; }
+      #a11y-panel #a11y-header-title { color: #fff; font-size: 14px !important; font-weight: 600; }
+      #a11y-close { background: none; border: none; color: #666; cursor: pointer; font-size: 18px; line-height: 1; padding: 2px 4px; border-radius: 4px; transition: color .15s; }
+      #a11y-close:hover { color: #fff; }
+      #a11y-body { padding: 12px 16px 0; }
+      #a11y-panel .a11y-section-label { display: block; font-size: 10px !important; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #999; margin: 14px 0 8px; }
+      .a11y-font-seg { display: flex; background: #f2f2f2; border-radius: 8px; padding: 3px; gap: 2px; margin-bottom: 4px; }
+      #a11y-panel .a11y-font-seg button { flex: 1; padding: 7px 0; font-size: 12px !important; border: none; border-radius: 6px; cursor: pointer; background: transparent; color: #666; transition: all .15s; font-weight: 600; }
+      #a11y-panel .a11y-font-seg button.active { background: #fff; color: #111; box-shadow: 0 1px 4px rgba(0,0,0,.14); }
+      .a11y-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f2f2f2; color: #333; }
+      .a11y-toggle { position: relative; width: 44px; height: 26px; flex-shrink: 0; }
       .a11y-toggle input { opacity: 0; width: 0; height: 0; }
-      .a11y-slider { position: absolute; inset: 0; background: #ccc; border-radius: 20px; cursor: pointer; transition: .3s; }
-      .a11y-slider::before { content: ''; position: absolute; width: 14px; height: 14px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: .3s; }
-      .a11y-toggle input:checked + .a11y-slider { background: #0084ff; }
+      .a11y-slider { position: absolute; inset: 0; background: #ddd; border-radius: 26px; cursor: pointer; transition: .2s; }
+      .a11y-slider::before { content: ''; position: absolute; width: 20px; height: 20px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+      .a11y-toggle input:checked + .a11y-slider { background: #0071e3; }
       .a11y-toggle input:checked + .a11y-slider::before { transform: translateX(18px); }
-      .a11y-font-btns { display: flex; gap: 4px; }
-      .a11y-font-btns button { padding: 3px 8px; font-size: 11px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; background: #f5f5f5; }
-      .a11y-font-btns button.active { background: #0084ff; color: #fff; border-color: #0084ff; }
-      .a11y-reset { width: 100%; padding: 8px; font-size: 12px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; background: #fff; margin-top: 8px; font-family: sans-serif; position: sticky; bottom: 0; border-top: 1px solid #eee; }
-      .a11y-version { display: block; text-align: center; font-size: 10px; color: #bbb; margin-top: 8px; font-family: sans-serif; text-decoration: none; }
-      .a11y-version:hover { color: #888; }
+      #a11y-footer { padding: 12px 16px; border-top: 1px solid #f0f0f0; position: sticky; bottom: 0; background: #fff; border-radius: 0 0 16px 16px; }
+      #a11y-reset-btn { width: 100%; padding: 10px; font-size: 13px; font-weight: 500; border: 1.5px solid #e5e5e5; border-radius: 8px; cursor: pointer; background: #fff; color: #333; transition: all .15s; font-family: system-ui, sans-serif; }
+      #a11y-reset-btn:hover { background: #f5f5f5; }
+      #a11y-panel .a11y-version { display: block; text-align: center; font-size: 10px !important; color: #ccc; margin-top: 8px; text-decoration: none; }
+      #a11y-panel .a11y-version:hover { color: #999; }
     `;
     document.head.appendChild(s);
   }
@@ -73,24 +80,31 @@
     }
 
     panel.innerHTML = `
-      <h3>הגדרות נגישות</h3>
-      <div class="a11y-row"><span>גודל גופן</span>
-        <div class="a11y-font-btns">
+      <div id="a11y-header">
+        <span id="a11y-header-title">הגדרות נגישות</span>
+        <button id="a11y-close">✕</button>
+      </div>
+      <div id="a11y-body">
+        <span class="a11y-section-label">גודל גופן</span>
+        <div class="a11y-font-seg">
           <button data-size="0">רגיל</button>
           <button data-size="1">+</button>
           <button data-size="2">++</button>
           <button data-size="3">+++</button>
         </div>
+        <span class="a11y-section-label">תצוגה</span>
+        <div class="a11y-row"><span>ניגודיות גבוהה</span><label class="a11y-toggle"><input type="checkbox" id="a11y-contrast"><span class="a11y-slider"></span></label></div>
+        <div class="a11y-row"><span>צבעים הפוכים</span><label class="a11y-toggle"><input type="checkbox" id="a11y-inverted"><span class="a11y-slider"></span></label></div>
+        <div class="a11y-row"><span>גוונים אפורים</span><label class="a11y-toggle"><input type="checkbox" id="a11y-gray"><span class="a11y-slider"></span></label></div>
+        <span class="a11y-section-label">קריאות</span>
+        <div class="a11y-row"><span>קו תחת קישורים</span><label class="a11y-toggle"><input type="checkbox" id="a11y-links"><span class="a11y-slider"></span></label></div>
+        <div class="a11y-row"><span>ללא אנימציות</span><label class="a11y-toggle"><input type="checkbox" id="a11y-anim"><span class="a11y-slider"></span></label></div>
+        <div class="a11y-row"><span>גופן קריא</span><label class="a11y-toggle"><input type="checkbox" id="a11y-font"><span class="a11y-slider"></span></label></div>
       </div>
-      <div class="a11y-row"><span>ניגודיות גבוהה</span><label class="a11y-toggle"><input type="checkbox" id="a11y-contrast"><span class="a11y-slider"></span></label></div>
-      <div class="a11y-row"><span>צבעים הפוכים</span><label class="a11y-toggle"><input type="checkbox" id="a11y-inverted"><span class="a11y-slider"></span></label></div>
-      <div class="a11y-row"><span>גוונים אפורים</span><label class="a11y-toggle"><input type="checkbox" id="a11y-gray"><span class="a11y-slider"></span></label></div>
-      <div class="a11y-row"><span>קו תחת לינקים</span><label class="a11y-toggle"><input type="checkbox" id="a11y-links"><span class="a11y-slider"></span></label></div>
-      <div class="a11y-row"><span>ללא אנימציות</span><label class="a11y-toggle"><input type="checkbox" id="a11y-anim"><span class="a11y-slider"></span></label></div>
-      <div class="a11y-row"><span>גופן קריא</span><label class="a11y-toggle"><input type="checkbox" id="a11y-font"><span class="a11y-slider"></span></label></div>
-      <button class="a11y-reset" id="a11y-reset">איפוס</button>
-      <a class="a11y-version" href="https://scriptable.dev" target="_blank" rel="noopener">accessibility@1.0.0 · scriptable.dev</a>
-    `;
+      <div id="a11y-footer">
+        <button id="a11y-reset-btn">איפוס הכל</button>
+        <a class="a11y-version" href="https://scriptable.dev" target="_blank" rel="noopener">accessibility@1.0.0 · scriptable.dev</a>
+      </div>`;
 
     document.body.appendChild(btn);
     document.body.appendChild(panel);
@@ -105,6 +119,7 @@
       if (!panel.hidden) document.dispatchEvent(new CustomEvent('ybwidget:open', { detail: { id: 'a11y' } }));
     });
     document.addEventListener('ybwidget:open', function (e) { if (e.detail.id !== 'a11y') panel.hidden = true; });
+    panel.querySelector('#a11y-close').addEventListener('click', () => { panel.hidden = true; });
 
     panel.querySelectorAll('[data-size]').forEach(b => {
       if (parseInt(b.dataset.size) === state.fontSize) b.classList.add('active');
@@ -123,7 +138,7 @@
     toggle('noAnimations', panel.querySelector('#a11y-anim'));
     toggle('readableFont', panel.querySelector('#a11y-font'));
 
-    panel.querySelector('#a11y-reset').addEventListener('click', () => {
+    panel.querySelector('#a11y-reset-btn').addEventListener('click', () => {
       state = Object.assign({}, defaults);
       applyState();
       panel.hidden = true;
