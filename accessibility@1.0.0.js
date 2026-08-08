@@ -46,7 +46,8 @@
       .a11y-font-btns button { padding: 3px 8px; font-size: 11px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; background: #f5f5f5; }
       .a11y-font-btns button.active { background: #0084ff; color: #fff; border-color: #0084ff; }
       .a11y-reset { width: 100%; padding: 6px; font-size: 12px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; background: #f5f5f5; margin-top: 4px; font-family: sans-serif; }
-      .a11y-version { display: block; text-align: center; font-size: 10px; color: #bbb; margin-top: 8px; font-family: sans-serif; }
+      .a11y-version { display: block; text-align: center; font-size: 10px; color: #bbb; margin-top: 8px; font-family: sans-serif; text-decoration: none; }
+      .a11y-version:hover { color: #888; }
     `;
     document.head.appendChild(s);
   }
@@ -83,7 +84,7 @@
       <div class="a11y-row"><span>ללא אנימציות</span><label class="a11y-toggle"><input type="checkbox" id="a11y-anim"><span class="a11y-slider"></span></label></div>
       <div class="a11y-row"><span>גופן קריא</span><label class="a11y-toggle"><input type="checkbox" id="a11y-font"><span class="a11y-slider"></span></label></div>
       <button class="a11y-reset" id="a11y-reset">איפוס</button>
-      <span class="a11y-version">accessibility@1.0.0</span>
+      <a class="a11y-version" href="https://scriptable.dev" target="_blank" rel="noopener">accessibility@1.0.0 · scriptable.dev</a>
     `;
 
     document.body.appendChild(btn);
