@@ -122,7 +122,7 @@
       if (!container) return;
       const el = document.createElement('div');
       el.style.cssText = 'font-size:12px;color:#e53e3e;text-align:center;padding:12px;line-height:1.6;';
-      el.innerHTML = `⚠️ ${message}<br><a href="${link}" target="_blank" rel="noopener" style="color:#0088cc">קבל טוקן חינמי ←</a>`;
+      el.innerHTML = `⚠️ ${message}<br><a href="https://bizapp.yellowbox.co.il" target="_blank" rel="noopener" style="color:#0088cc">קבל טוקן חינמי ←</a>`;
       container.appendChild(el);
     });
 
