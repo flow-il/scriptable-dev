@@ -18,7 +18,8 @@ jobs:
           test -f sitemap.xml
           test -f vercel.json
           test -f accessibility@1.0.0.js
-          test -f chat@1.0.0.js
+          test -f yellowbox@1.0.0.js
+          test -f coordinator@1.0.0.js
           echo "All required files present"
       - name: Check no secrets in JS components
         run: |
