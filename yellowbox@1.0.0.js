@@ -117,6 +117,14 @@
 
     socket = window.io(PLATFORM_URL, { auth: { siteId, guestToken } });
     socket.on('message:new', appendMessage);
+    socket.on('domain_locked', ({ message, link }) => {
+      const container = document.getElementById('cp-messages');
+      if (!container) return;
+      const el = document.createElement('div');
+      el.style.cssText = 'font-size:12px;color:#e53e3e;text-align:center;padding:12px;line-height:1.6;';
+      el.innerHTML = `⚠️ ${message}<br><a href="${link}" target="_blank" rel="noopener" style="color:#0088cc">קבל טוקן חינמי ←</a>`;
+      container.appendChild(el);
+    });
 
     if (guestToken) {
       const convRes = await fetch(`${PLATFORM_URL}/api/conversations/by-token/${guestToken}`);
