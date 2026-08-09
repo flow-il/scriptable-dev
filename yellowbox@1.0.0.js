@@ -86,10 +86,11 @@
     container.scrollTop = container.scrollHeight;
   }
 
-  function sendMessage() {
+  async function sendMessage() {
     const input = document.getElementById('cp-input');
     const content = input.value.trim();
-    if (!content || !socket || !conversationId) return;
+    if (!content || !socket) return;
+    if (!await ensureConversation()) return;
     socket.emit('message:send', { conversationId, content });
     input.value = '';
   }
@@ -137,16 +138,22 @@
       localStorage.removeItem('cp_guest_token');
       guestToken = null;
     }
+    // שיחה חדשה תיפתח רק בהודעה הראשונה — לא בטעינת הדף
+  }
 
+  async function ensureConversation() {
+    if (conversationId) return true;
     const convRes = await fetch(`${PLATFORM_URL}/api/conversations`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ siteId }),
     });
+    if (!convRes.ok) return false;
     const conv = await convRes.json();
     conversationId = conv.id;
     guestToken = conv.guestToken;
     localStorage.setItem('cp_guest_token', guestToken);
+    return true;
   }
 
   init();
