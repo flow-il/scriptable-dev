@@ -30,8 +30,8 @@
   document.head.appendChild(style);
 
   const scriptTag = document.querySelector('script[data-token]');
-  // data-platform מאפשר להגיש את הwidget מ-CDN נפרד (scriptable.dev) תוך חיבור לפלטפורמה הנכונה
-  const PLATFORM_URL = scriptTag.dataset.platform || new URL(scriptTag.src).origin;
+  // data-platform אופציונלי ל-override בדv בלבד — ב-production תמיד פונה ל-bizapp.yellowbox.co.il
+  const PLATFORM_URL = scriptTag.dataset.platform || 'https://bizapp.yellowbox.co.il';
 
   let socket = null;
   let conversationId = null;

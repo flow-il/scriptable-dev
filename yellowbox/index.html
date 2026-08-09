@@ -121,7 +121,7 @@
       <div class="code-wrap">
         <pre id="code-install">&lt;script src="https://scriptable.dev/yellowbox@1.0.0.js"
         data-token="YOUR_TOKEN"
-        data-platform="https://YOUR_PLATFORM.railway.app"&gt;&lt;/script&gt;</pre>
+        async&gt;&lt;/script&gt;</pre>
         <button class="copy-btn" onclick="copy('code-install', this)">העתק</button>
       </div>
     </section>
@@ -141,7 +141,7 @@
       <table>
         <tr><th>שם</th><th>חובה?</th><th>תיאור</th></tr>
         <tr><td>data-token</td><td><span class="req">●</span> חובה</td><td>Widget token מ-<a href="https://bizapp.yellowbox.co.il" rel="noopener noreferrer" target="_blank" style="color:var(--green)">bizapp.yellowbox.co.il</a></td></tr>
-        <tr><td>data-platform</td><td><span class="req">●</span> חובה</td><td>URL של שרת הפלטפורמה (Railway deployment URL)</td></tr>
+        <tr><td>data-platform</td><td>אופציונלי</td><td>URL מתחילי ל-override בסביבת dev בלבד</td></tr>
       </table>
     </section>
 
@@ -206,6 +206,6 @@ function copy(id, btn) {
 </script>
 <script src="https://scriptable.dev/coordinator@1.0.0.js"></script>
 <script src="https://scriptable.dev/accessibility@1.0.0.js"></script>
-<script src="https://scriptable.dev/yellowbox@1.0.0.js" data-token="cmsl2yjrr000833noe25j47wo" data-platform="https://yellowbox-production.up.railway.app" async></script>
+<script src="https://scriptable.dev/yellowbox@1.0.0.js" data-token="cmsl2yjrr000833noe25j47wo" async></script>
 </body>
 </html>
