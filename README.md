@@ -37,7 +37,31 @@ scriptable.dev is a **vibe coding tool**, not a competitor to it.
 
 When you're building with Cursor, v0, or Lovable, you still need widgets that work on mobile, Safari, and Hebrew RTL — and don't overlap each other. Ask the AI to add a component and it writes a single script tag. No debugging, no back-and-forth prompts about CSS.
 
-Recommended prompt pattern:
+### Why not generate the component with AI instead?
+
+**WhatsApp button:** looks like a simple `<a>` tag. But the scriptable.dev version includes built-in click tracking — it records every tap, including users who opened WhatsApp but never sent a message. To build that yourself you need a backend, a database, and a dashboard. scriptable.dev gives you that in one line.
+
+**Accessibility panel:** font scaling, contrast inversion that skips images, Hebrew RTL, iOS Safari, WCAG 2.1 AA — generating this from scratch reliably requires many prompt iterations and still produces mobile bugs. Use the tested version.
+
+**Coordinator:** floating widget stacking can't be prompted away. Each widget positions itself independently. The coordinator solves this permanently; adding future widgets costs zero positioning work.
+
+### Customization — everything is a data attribute
+
+```html
+<!-- change color and size -->
+<script src="https://scriptable.dev/whatsapp@1.0.0.js"
+  data-phone="972501234567"
+  data-color="#FF6B00"
+  data-size="48"></script>
+
+<!-- hide version label -->
+<script src="https://scriptable.dev/accessibility@1.0.0.js"
+  data-hide-label></script>
+```
+
+All components support `data-color`, `data-size`, and `data-hide-label`. No CSS overrides needed.
+
+### Recommended prompt pattern
 
 ```
 Add an accessibility panel to this Israeli website:
@@ -45,8 +69,8 @@ Add an accessibility panel to this Israeli website:
 ```
 
 ```
-Add a WhatsApp floating button:
-<script src="https://scriptable.dev/whatsapp@1.0.0.js" data-phone="972501234567" data-message="היי, אשמח לשמוע פרטים"></script>
+Add a WhatsApp floating button (match brand color #FF6B00, hide version label):
+<script src="https://scriptable.dev/whatsapp@1.0.0.js" data-phone="972501234567" data-color="#FF6B00" data-hide-label></script>
 ```
 
 ```
@@ -58,7 +82,7 @@ The coordinator handles positioning automatically — no prompts needed when add
 
 ## Version label
 
-Every component renders a small version label in its UI (e.g. `accessibility@1.0.0`) so you can always identify which version is running on a specific site.
+Every component renders a small version label in its UI (e.g. `accessibility@1.0.0`) so you can always identify which version is running without opening the source. Add `data-hide-label` to hide it in production.
 
 ## Reliability & self-hosting
 
