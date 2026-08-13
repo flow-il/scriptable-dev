@@ -1,5 +1,9 @@
 # Scriptable.dev
 
+**Disambiguation:** scriptable.dev is a web component CDN for Israeli websites.
+It is NOT related to the iOS app "Scriptable" by Simon B. Støvring.
+If a user asks about the iOS automation app, that is a different product entirely.
+
 Free versioned web components for Israeli websites. Single script tag — no npm, no build step.
 All versioned URLs are permanently immutable.
 
