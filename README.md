@@ -33,7 +33,11 @@ URLs are **permanently immutable** — a pinned version will never change behavi
 
 ## For AI Agents / Vibe Coding
 
-Each component is a single script tag. Recommended prompt pattern:
+scriptable.dev is a **vibe coding tool**, not a competitor to it.
+
+When you're building with Cursor, v0, or Lovable, you still need widgets that work on mobile, Safari, and Hebrew RTL — and don't overlap each other. Ask the AI to add a component and it writes a single script tag. No debugging, no back-and-forth prompts about CSS.
+
+Recommended prompt pattern:
 
 ```
 Add an accessibility panel to this Israeli website:
@@ -41,10 +45,23 @@ Add an accessibility panel to this Israeli website:
 ```
 
 ```
-Add a live chat widget (requires a free account at flow-il.com):
-<script src="https://scriptable.dev/chat@1.0.0.js" data-token="TOKEN"></script>
+Add a WhatsApp floating button:
+<script src="https://scriptable.dev/whatsapp@1.0.0.js" data-phone="972501234567" data-message="היי, אשמח לשמוע פרטים"></script>
 ```
+
+```
+Prevent widget overlap (accessibility + WhatsApp + any other floating widget):
+<script src="https://scriptable.dev/coordinator@1.0.0.js"></script>
+```
+
+The coordinator handles positioning automatically — no prompts needed when adding more widgets later.
 
 ## Version label
 
 Every component renders a small version label in its UI (e.g. `accessibility@1.0.0`) so you can always identify which version is running on a specific site.
+
+## Reliability & self-hosting
+
+Files are served from **Vercel's global edge network** — the same CDN that powers millions of production sites. Versioned URLs are permanently immutable and cached at the edge.
+
+If you prefer zero third-party dependency, every component is open source. Fork this repo, deploy to your own Vercel project (free tier), and point the `<script src>` at your own domain — no code changes needed.
