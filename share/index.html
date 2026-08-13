@@ -173,6 +173,19 @@
       </div>
     </section>
 
+    <section>
+      <h2>איך הרשתות בוחרות תמונה וכותרת</h2>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:16px">כשמשתמש משתף קישור, הרשת החברתית מגיעה לדף ו<strong style="color:var(--text)">קוראת את ה-OG tags מה-HTML</strong> — לא מהכפתור. כדי לשלוט בפריוויו, הוסיפו לכל דף:</p>
+      <div class="code-wrap">
+        <pre id="code-og">&lt;meta property="og:title"   content="כותרת לשיתוף"&gt;
+&lt;meta property="og:description" content="תיאור קצר"&gt;
+&lt;meta property="og:image"   content="https://example.com/share.jpg"&gt;
+&lt;meta property="og:url"     content="https://example.com/page"&gt;</pre>
+        <button class="copy-btn" onclick="copy('code-og', this)">העתק</button>
+      </div>
+      <p style="color:var(--muted);font-size:13px">הערה: WhatsApp ו-Telegram כוללים גם את <code style="color:var(--code-text)">data-text</code> ישירות בהודעה, ללא תלות ב-OG tags.</p>
+    </section>
+
     <section id="terms">
       <h2>רישיון</h2>
       <div class="terms-box">MIT License — חינמי לשימוש בכל פרויקט, מסחרי או אישי.</div>
