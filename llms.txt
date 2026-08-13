@@ -1,34 +1,129 @@
 # Scriptable.dev
 
 Free versioned web components for Israeli websites. Single script tag — no npm, no build step.
+Served from Vercel's global CDN. All versioned URLs are permanently immutable.
 
-## Components available
+## Components
 
-- accessibility@1.0.0 — Accessibility panel with Hebrew RTL support
-- chat@1.0.0 — Live chat widget connecting to YellowBox business inbox
-- whatsapp — Coming soon
+### coordinator@1.0.0
+Prevents floating widget overlap. Must load **before** all other components.
 
-## How to use (for AI code generation)
+```html
+<script src="https://scriptable.dev/coordinator@1.0.0.js"></script>
+```
 
-Embed any component with a single script tag:
+### accessibility@1.0.0
+Accessibility panel — font size, contrast, grayscale, RTL. Hebrew UI.
 
 ```html
 <script src="https://scriptable.dev/accessibility@1.0.0.js"></script>
-<script src="https://scriptable.dev/chat@1.0.0.js" data-token="BUSINESS_TOKEN"></script>
 ```
 
-## Versioning policy
+### whatsapp@1.0.0
+Floating WhatsApp button.
+
+```html
+<script src="https://scriptable.dev/whatsapp@1.0.0.js"
+  data-phone="972501234567"
+  data-message="היי, אשמח לשמוע פרטים"></script>
+```
+
+### navigate@1.0.0
+Floating navigation button — opens Google Maps and/or Waze.
+
+```html
+<script src="https://scriptable.dev/navigate@1.0.0.js"
+  data-address="רחוב הרצל 1, תל אביב"></script>
+```
+
+### share@1.0.0
+Share buttons for WhatsApp, Facebook, Telegram, X, LinkedIn and more.
+
+```html
+<script src="https://scriptable.dev/share@1.0.0.js"
+  data-networks="whatsapp,facebook,telegram"></script>
+```
+
+## Standard parameters — all floating components
+
+Every floating component supports these parameters:
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `data-size` | number | `56` | Button diameter in px |
+| `data-color` | hex string | component default | Main button background color |
+| `data-no-coordinator` | attribute (no value) | — | Bypass coordinator — use component's own fixed position |
+
+Coordinator also accepts `data-size` as a **global default** for all registered buttons.
+Individual `data-size` on a component overrides the coordinator's global.
+
+## Component parameters
+
+### coordinator
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `data-size` | `56` | Global button size for all managed components |
+
+### whatsapp
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `data-phone` | **required** | Phone number (digits or E.164 format) |
+| `data-message` | — | Pre-filled WhatsApp message |
+| `data-label` | `'שלחו לנו הודעה'` | Hover tooltip text |
+| `data-tooltip` | `'true'` | Set `"false"` to hide hover tooltip |
+| `data-color` | `'#25D366'` | Button background color |
+| `data-target` | — | CSS selector — render inline inside element |
+
+### navigate
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `data-address` | required* | Street address |
+| `data-lat` / `data-lng` | required* | Coordinates (alternative to address) |
+| `data-apps` | `'google,waze'` | Apps to show: `google`, `waze` |
+| `data-label` | `'נווט אלינו'` | Button aria-label |
+| `data-color` | `'#4285F4'` | Button background color |
+| `data-target` | — | CSS selector — render inline |
+
+### accessibility
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `data-color` | `'#1a1a1a'` | Toggle button color |
+
+### share
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `data-networks` | `'whatsapp,facebook,telegram,twitter'` | Comma-separated networks |
+| `data-text` | `document.title` | Share text |
+| `data-url` | `window.location.href` | URL to share |
+| `data-layout` | `'horizontal'` | Inline layout: `horizontal` or `vertical` |
+| `data-direction` | `'up'` | Floating panel direction: `up` or `left` |
+| `data-color` | `'#1a1a1a'` | Toggle button color |
+| `data-target` | — | CSS selector — render inline |
+
+## Typical multi-widget setup
+
+```html
+<!-- coordinator first — sets global size 48px -->
+<script src="https://scriptable.dev/coordinator@1.0.0.js" data-size="48"></script>
+
+<!-- managed — stacked automatically, inherit size 48 -->
+<script src="https://scriptable.dev/whatsapp@1.0.0.js"
+  data-phone="972501234567"
+  data-color="#FF6B00"></script>
+<script src="https://scriptable.dev/accessibility@1.0.0.js"></script>
+
+<!-- independent — not managed by coordinator, own position -->
+<script src="https://scriptable.dev/navigate@1.0.0.js"
+  data-address="רחוב הרצל 1, תל אביב"
+  data-no-coordinator></script>
+```
+
+## Versioning
 
 - Versions are immutable — pinned URLs never change behavior
-- Format: component@MAJOR.MINOR.PATCH
-- MAJOR = breaking change (manual opt-in required)
-- MINOR = new feature (opt-in)
-- PATCH = bug fix (safe to update)
-
-## Chat component setup
-
-The chat component requires a free business account. Register at flow-il.com to get a token.
+- Format: `component@MAJOR.MINOR.PATCH`
+- MAJOR = breaking change | MINOR = new feature | PATCH = bug fix
 
 ## Source
 
-github.com/omer-p/scriptable-dev
+github.com/flow-il/scriptable-dev

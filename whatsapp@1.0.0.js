@@ -8,6 +8,8 @@
   const target        = (script && script.getAttribute('data-target'))   || null;
   const noCoordinator = !!(script && script.hasAttribute('data-no-coordinator'));
   const localSize     = parseInt(script && script.getAttribute('data-size')) || 0;
+  const color         = (script && script.getAttribute('data-color'))   || '#25D366';
+  const showTooltip   = (script && script.getAttribute('data-tooltip')) !== 'false';
 
   if (!phone) { console.warn('[whatsapp] missing data-phone'); return; }
 
@@ -25,7 +27,7 @@
         right: 24px;
         width: ${size}px; height: ${size}px;
         border-radius: 50%;
-        background: #25D366;
+        background: ${color};
         border: none; cursor: pointer;
         box-shadow: 0 4px 16px rgba(0,0,0,.25);
         display: flex; align-items: center; justify-content: center;
@@ -86,12 +88,14 @@
       if (container) { container.innerHTML = ''; container.appendChild(btn); }
       else { console.warn('[whatsapp] data-target not found:', target); document.body.appendChild(btn); }
     } else {
-      const tooltip = document.createElement('div');
-      tooltip.id = 'wa-tooltip';
-      tooltip.style.bottom = (pos.bottom + 14) + 'px';
-      tooltip.textContent = label;
       document.body.appendChild(btn);
-      document.body.appendChild(tooltip);
+      if (showTooltip) {
+        const tooltip = document.createElement('div');
+        tooltip.id = 'wa-tooltip';
+        tooltip.style.bottom = (pos.bottom + 14) + 'px';
+        tooltip.textContent = label;
+        document.body.appendChild(tooltip);
+      }
     }
   }
 

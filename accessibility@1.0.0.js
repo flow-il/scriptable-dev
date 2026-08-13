@@ -4,6 +4,7 @@
   const script        = document.currentScript || document.querySelector('script[src*="accessibility"]');
   const noCoordinator = !!(script && script.hasAttribute('data-no-coordinator'));
   const localSize     = parseInt(script && script.getAttribute('data-size')) || 0;
+  const color         = (script && script.getAttribute('data-color')) || '#1a1a1a';
   const size          = localSize || (window.YBCoordinator && window.YBCoordinator.globalSize) || 56;
 
   const STORAGE_KEY = 'a11y';
@@ -41,7 +42,7 @@
       html.a11y-no-animations *, html.a11y-no-animations *::before, html.a11y-no-animations *::after { animation: none !important; transition: none !important; }
       html.a11y-readable-font * { font-family: Arial, sans-serif !important; letter-spacing: .04em !important; line-height: 1.7 !important; }
 
-      #a11y-btn { position: fixed; left: 24px; width: ${size}px; height: ${size}px; border-radius: 50%; background: #1a1a1a; color: #fff; border: none; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.35); transition: transform .2s; display: flex; align-items: center; justify-content: center; }
+      #a11y-btn { position: fixed; left: 24px; width: ${size}px; height: ${size}px; border-radius: 50%; background: ${color}; color: #fff; border: none; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.35); transition: transform .2s; display: flex; align-items: center; justify-content: center; }
       #a11y-btn:hover { transform: scale(1.08); }
       #a11y-panel { position: fixed; left: 24px; background: #fff; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,.18); width: 260px; direction: rtl; max-height: calc(100vh - 200px); overflow-y: auto; font-family: system-ui, -apple-system, sans-serif; }
       #a11y-header { background: #1a1a1a; border-radius: 16px 16px 0 0; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; }

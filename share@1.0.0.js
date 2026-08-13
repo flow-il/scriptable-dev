@@ -10,6 +10,7 @@
   const direction     = (script && script.getAttribute('data-direction'))  || 'up';         // floating: up | left
   const noCoordinator = !!(script && script.hasAttribute('data-no-coordinator'));
   const localSize     = parseInt(script && script.getAttribute('data-size')) || 0;
+  const color         = (script && script.getAttribute('data-color')) || '#1a1a1a';
 
   const selected = networksRaw.split(',').map(s => s.trim()).filter(Boolean);
   const isInline = !!target;
@@ -86,7 +87,7 @@
       #share-toggle {
         position: fixed; right: 24px; bottom: ${pos.bottom}px;
         width: ${size}px; height: ${size}px; border-radius: 50%;
-        background: #1a1a1a; color: #fff; border: none; cursor: pointer;
+        background: ${color}; color: #fff; border: none; cursor: pointer;
         box-shadow: 0 4px 16px rgba(0,0,0,.3);
         display: flex; align-items: center; justify-content: center;
         transition: transform .2s; z-index: ${pos.zIndex};
