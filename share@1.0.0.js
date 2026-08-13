@@ -1,20 +1,23 @@
 (function () {
   'use strict';
 
-  const script = document.currentScript || document.querySelector('script[src*="share"]');
-  const networksRaw  = (script && script.getAttribute('data-networks'))  || 'whatsapp,facebook,telegram,twitter';
-  const shareText    = (script && script.getAttribute('data-text'))       || document.title;
-  const shareUrl     = (script && script.getAttribute('data-url'))        || window.location.href;
-  const target       = (script && script.getAttribute('data-target'))     || null;
-  const layout       = (script && script.getAttribute('data-layout'))     || 'horizontal'; // inline: horizontal | vertical
-  const direction    = (script && script.getAttribute('data-direction'))  || 'up';         // floating: up | left
+  const script        = document.currentScript || document.querySelector('script[src*="share"]');
+  const networksRaw   = (script && script.getAttribute('data-networks'))  || 'whatsapp,facebook,telegram,twitter';
+  const shareText     = (script && script.getAttribute('data-text'))       || document.title;
+  const shareUrl      = (script && script.getAttribute('data-url'))        || window.location.href;
+  const target        = (script && script.getAttribute('data-target'))     || null;
+  const layout        = (script && script.getAttribute('data-layout'))     || 'horizontal'; // inline: horizontal | vertical
+  const direction     = (script && script.getAttribute('data-direction'))  || 'up';         // floating: up | left
+  const noCoordinator = !!(script && script.hasAttribute('data-no-coordinator'));
+  const localSize     = parseInt(script && script.getAttribute('data-size')) || 0;
 
   const selected = networksRaw.split(',').map(s => s.trim()).filter(Boolean);
   const isInline = !!target;
   const enc = encodeURIComponent;
 
-  const pos = (!isInline && window.YBCoordinator)
-    ? window.YBCoordinator.register('share', { side: 'right', size: 56 })
+  const size = localSize || (window.YBCoordinator && window.YBCoordinator.globalSize) || 56;
+  const pos = (!isInline && !noCoordinator && window.YBCoordinator)
+    ? window.YBCoordinator.register('share', { side: 'right', size: size })
     : { bottom: 24, zIndex: 99997 };
 
   const NETWORKS = {
@@ -82,7 +85,7 @@
     s.textContent = `
       #share-toggle {
         position: fixed; right: 24px; bottom: ${pos.bottom}px;
-        width: 56px; height: 56px; border-radius: 50%;
+        width: ${size}px; height: ${size}px; border-radius: 50%;
         background: #1a1a1a; color: #fff; border: none; cursor: pointer;
         box-shadow: 0 4px 16px rgba(0,0,0,.3);
         display: flex; align-items: center; justify-content: center;
@@ -95,8 +98,8 @@
         z-index: ${pos.zIndex};
         transition: opacity .2s, transform .2s;
       }
-      #share-panel.dir-up    { flex-direction: column-reverse; right: 24px; bottom: ${pos.bottom + 64}px; align-items: center; }
-      #share-panel.dir-left  { flex-direction: row-reverse;   right: 88px; bottom: ${pos.bottom}px; align-items: center; }
+      #share-panel.dir-up    { flex-direction: column-reverse; right: 24px; bottom: ${pos.bottom + size + 8}px; align-items: center; }
+      #share-panel.dir-left  { flex-direction: row-reverse;   right: ${24 + size + 8}px; bottom: ${pos.bottom}px; align-items: center; }
       #share-panel.hidden { opacity: 0; pointer-events: none; transform: scale(0.85); }
     `;
     document.head.appendChild(s);

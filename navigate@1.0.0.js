@@ -1,22 +1,25 @@
 (function () {
   'use strict';
 
-  const script  = document.currentScript || document.querySelector('script[src*="navigate"]');
-  const address = (script && script.getAttribute('data-address')) || '';
-  const lat     = (script && script.getAttribute('data-lat'))     || '';
-  const lng     = (script && script.getAttribute('data-lng'))     || '';
-  const appsRaw = (script && script.getAttribute('data-apps'))    || 'google,waze';
-  const label   = (script && script.getAttribute('data-label'))   || 'נווט אלינו';
-  const target  = (script && script.getAttribute('data-target'))  || null;
+  const script        = document.currentScript || document.querySelector('script[src*="navigate"]');
+  const address       = (script && script.getAttribute('data-address')) || '';
+  const lat           = (script && script.getAttribute('data-lat'))     || '';
+  const lng           = (script && script.getAttribute('data-lng'))     || '';
+  const appsRaw       = (script && script.getAttribute('data-apps'))    || 'google,waze';
+  const label         = (script && script.getAttribute('data-label'))   || 'נווט אלינו';
+  const target        = (script && script.getAttribute('data-target'))  || null;
+  const noCoordinator = !!(script && script.hasAttribute('data-no-coordinator'));
+  const localSize     = parseInt(script && script.getAttribute('data-size')) || 0;
 
   if (!address && !(lat && lng)) { console.warn('[navigate] missing data-address or data-lat/data-lng'); return; }
 
-  const apps    = appsRaw.split(',').map(s => s.trim()).filter(Boolean);
+  const apps     = appsRaw.split(',').map(s => s.trim()).filter(Boolean);
   const isInline = !!target;
   const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
-  const pos = (!isInline && window.YBCoordinator)
-    ? window.YBCoordinator.register('navigate', { side: 'right', size: 56 })
+  const size = localSize || (window.YBCoordinator && window.YBCoordinator.globalSize) || 56;
+  const pos = (!isInline && !noCoordinator && window.YBCoordinator)
+    ? window.YBCoordinator.register('navigate', { side: 'right', size: size })
     : { bottom: 24, zIndex: 99996 };
 
   const APPS = {
@@ -49,7 +52,7 @@
     s.textContent = `
       #nav-btn {
         position: fixed; right: 24px; bottom: ${pos.bottom}px;
-        width: 56px; height: 56px; border-radius: 50%;
+        width: ${size}px; height: ${size}px; border-radius: 50%;
         background: #4285F4; color: #fff; border: none; cursor: pointer;
         box-shadow: 0 4px 16px rgba(0,0,0,.28);
         display: flex; align-items: center; justify-content: center;
@@ -58,10 +61,10 @@
       #nav-btn.nav-inline { position: static; box-shadow: none; }
       #nav-btn:hover { transform: scale(1.08); }
       #nav-btn.nav-inline:hover { transform: scale(1.08); box-shadow: 0 4px 16px rgba(0,0,0,.25); }
-      #nav-btn svg { width: 26px; height: 26px; }
+      #nav-btn svg { width: ${Math.round(size * 0.46)}px; height: ${Math.round(size * 0.46)}px; }
 
       #nav-popup {
-        position: fixed; right: 88px; bottom: ${pos.bottom}px;
+        position: fixed; right: ${24 + size + 8}px; bottom: ${pos.bottom}px;
         background: #fff; border-radius: 12px;
         box-shadow: 0 4px 24px rgba(0,0,0,.18);
         display: flex; flex-direction: column; gap: 0;

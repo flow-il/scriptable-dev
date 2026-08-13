@@ -1,16 +1,19 @@
 (function () {
   'use strict';
 
+  const script     = document.currentScript || document.querySelector('script[src*="coordinator"]');
+  const globalSize = parseInt(script && script.getAttribute('data-size')) || null;
+
   const MARGIN = 24; // px from screen edge
   const GAP = 8;     // px between buttons
   const stacks = { left: MARGIN, right: MARGIN };
   let zCounter = 99900;
 
-  // Each widget calls register() once at load time and gets its bottom + zIndex
   window.YBCoordinator = {
+    globalSize: globalSize,
     register: function (id, options) {
       const side = (options && options.side) || 'left';
-      const size = (options && options.size) || 56;
+      const size = (options && options.size) || globalSize || 56;
       const bottom = stacks[side];
       stacks[side] += size + GAP;
       zCounter += 10;

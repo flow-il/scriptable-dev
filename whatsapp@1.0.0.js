@@ -1,18 +1,20 @@
 (function () {
   'use strict';
 
-  const script = document.currentScript || document.querySelector('script[src*="whatsapp"]');
-  const phone   = (script && script.getAttribute('data-phone'))   || '';
-  const message = (script && script.getAttribute('data-message')) || '';
-  const label   = (script && script.getAttribute('data-label'))   || 'שלחו לנו הודעה';
-  const target  = (script && script.getAttribute('data-target'))  || null;
+  const script        = document.currentScript || document.querySelector('script[src*="whatsapp"]');
+  const phone         = (script && script.getAttribute('data-phone'))    || '';
+  const message       = (script && script.getAttribute('data-message'))  || '';
+  const label         = (script && script.getAttribute('data-label'))    || 'שלחו לנו הודעה';
+  const target        = (script && script.getAttribute('data-target'))   || null;
+  const noCoordinator = !!(script && script.hasAttribute('data-no-coordinator'));
+  const localSize     = parseInt(script && script.getAttribute('data-size')) || 0;
 
   if (!phone) { console.warn('[whatsapp] missing data-phone'); return; }
 
-  // inline mode: render inside target element, skip coordinator
   const isInline = !!target;
-  const pos = (!isInline && window.YBCoordinator)
-    ? window.YBCoordinator.register('whatsapp', { side: 'right', size: 56 })
+  const size = localSize || (window.YBCoordinator && window.YBCoordinator.globalSize) || 56;
+  const pos = (!isInline && !noCoordinator && window.YBCoordinator)
+    ? window.YBCoordinator.register('whatsapp', { side: 'right', size: size })
     : { bottom: 24, zIndex: 99998 };
 
   function injectStyles() {
@@ -21,7 +23,7 @@
       #wa-btn {
         position: fixed;
         right: 24px;
-        width: 56px; height: 56px;
+        width: ${size}px; height: ${size}px;
         border-radius: 50%;
         background: #25D366;
         border: none; cursor: pointer;
@@ -36,9 +38,9 @@
       }
       #wa-btn:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(0,0,0,.32); }
       #wa-btn.wa-inline:hover { transform: scale(1.08); box-shadow: 0 4px 16px rgba(0,0,0,.25); }
-      #wa-btn svg { width: 28px; height: 28px; }
+      #wa-btn svg { width: ${Math.round(size * 0.5)}px; height: ${Math.round(size * 0.5)}px; }
       #wa-tooltip {
-        position: fixed; right: 90px;
+        position: fixed; right: ${size + 34}px;
         background: #fff; color: #111;
         font-family: system-ui, sans-serif;
         font-size: 13px; font-weight: 500;
