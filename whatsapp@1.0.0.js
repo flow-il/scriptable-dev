@@ -10,6 +10,7 @@
   const localSize     = parseInt(script && script.getAttribute('data-size')) || 0;
   const color         = (script && script.getAttribute('data-color'))   || '#25D366';
   const showTooltip   = (script && script.getAttribute('data-tooltip')) !== 'false';
+  const hideLabel     = !!(script && script.hasAttribute('data-hide-label'));
 
   if (!phone) { console.warn('[whatsapp] missing data-phone'); return; }
 
@@ -53,6 +54,8 @@
         z-index: ${pos.zIndex};
       }
       #wa-btn:not(.wa-inline):hover + #wa-tooltip { opacity: 1; }
+      #wa-label { position: fixed; right: 24px; bottom: ${pos.bottom - 14}px; width: ${size}px; font-size: 9px; font-family: monospace; color: rgba(0,0,0,.35); text-align: center; line-height: 1; text-decoration: none; }
+      #wa-label:hover { color: rgba(0,0,0,.6); }
     `;
     document.head.appendChild(s);
   }
@@ -89,6 +92,16 @@
       else { console.warn('[whatsapp] data-target not found:', target); document.body.appendChild(btn); }
     } else {
       document.body.appendChild(btn);
+      if (!hideLabel) {
+        const lbl = document.createElement('a');
+        lbl.id = 'wa-label';
+        lbl.href = 'https://scriptable.dev';
+        lbl.target = '_blank';
+        lbl.rel = 'noopener';
+        lbl.textContent = 'whatsapp@1.0.0';
+        lbl.style.bottom = (pos.bottom - 14) + 'px';
+        document.body.appendChild(lbl);
+      }
       if (showTooltip) {
         const tooltip = document.createElement('div');
         tooltip.id = 'wa-tooltip';

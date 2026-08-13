@@ -11,6 +11,7 @@
   const noCoordinator = !!(script && script.hasAttribute('data-no-coordinator'));
   const localSize     = parseInt(script && script.getAttribute('data-size')) || 0;
   const color         = (script && script.getAttribute('data-color')) || '#1a1a1a';
+  const hideLabel     = !!(script && script.hasAttribute('data-hide-label'));
 
   const selected = networksRaw.split(',').map(s => s.trim()).filter(Boolean);
   const isInline = !!target;
@@ -102,6 +103,8 @@
       #share-panel.dir-up    { flex-direction: column-reverse; right: 24px; bottom: ${pos.bottom + size + 8}px; align-items: center; }
       #share-panel.dir-left  { flex-direction: row-reverse;   right: ${24 + size + 8}px; bottom: ${pos.bottom}px; align-items: center; }
       #share-panel.hidden { opacity: 0; pointer-events: none; transform: scale(0.85); }
+      #share-label { position: fixed; right: 24px; bottom: ${pos.bottom - 14}px; width: ${size}px; font-size: 9px; font-family: monospace; color: rgba(0,0,0,.35); text-align: center; line-height: 1; text-decoration: none; }
+      #share-label:hover { color: rgba(0,0,0,.6); }
     `;
     document.head.appendChild(s);
   }
@@ -137,6 +140,16 @@
 
     document.body.appendChild(toggle);
     document.body.appendChild(panel);
+    if (!hideLabel) {
+      const lbl = document.createElement('a');
+      lbl.id = 'share-label';
+      lbl.href = 'https://scriptable.dev';
+      lbl.target = '_blank';
+      lbl.rel = 'noopener';
+      lbl.textContent = 'share@1.0.0';
+      lbl.style.bottom = (pos.bottom - 14) + 'px';
+      document.body.appendChild(lbl);
+    }
   }
 
   function renderInline() {

@@ -1,26 +1,22 @@
 (function () {
   'use strict';
 
-  const script        = document.currentScript || document.querySelector('script[src*="navigate"]');
-  const address       = (script && script.getAttribute('data-address')) || '';
-  const lat           = (script && script.getAttribute('data-lat'))     || '';
-  const lng           = (script && script.getAttribute('data-lng'))     || '';
-  const appsRaw       = (script && script.getAttribute('data-apps'))    || 'google,waze';
-  const label         = (script && script.getAttribute('data-label'))   || 'נווט אלינו';
-  const target        = (script && script.getAttribute('data-target'))  || null;
-  const noCoordinator = !!(script && script.hasAttribute('data-no-coordinator'));
-  const localSize     = parseInt(script && script.getAttribute('data-size')) || 0;
-  const color         = (script && script.getAttribute('data-color')) || '#4285F4';
+  const script  = document.currentScript || document.querySelector('script[src*="navigate"]');
+  const address = (script && script.getAttribute('data-address')) || '';
+  const lat     = (script && script.getAttribute('data-lat'))     || '';
+  const lng     = (script && script.getAttribute('data-lng'))     || '';
+  const appsRaw = (script && script.getAttribute('data-apps'))    || 'google,waze';
+  const label   = (script && script.getAttribute('data-label'))   || 'נווט אלינו';
+  const target  = (script && script.getAttribute('data-target'))  || null;
 
   if (!address && !(lat && lng)) { console.warn('[navigate] missing data-address or data-lat/data-lng'); return; }
 
-  const apps     = appsRaw.split(',').map(s => s.trim()).filter(Boolean);
+  const apps    = appsRaw.split(',').map(s => s.trim()).filter(Boolean);
   const isInline = !!target;
   const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
-  const size = localSize || (window.YBCoordinator && window.YBCoordinator.globalSize) || 56;
-  const pos = (!isInline && !noCoordinator && window.YBCoordinator)
-    ? window.YBCoordinator.register('navigate', { side: 'right', size: size })
+  const pos = (!isInline && window.YBCoordinator)
+    ? window.YBCoordinator.register('navigate', { side: 'right', size: 56 })
     : { bottom: 24, zIndex: 99996 };
 
   const APPS = {
@@ -53,8 +49,8 @@
     s.textContent = `
       #nav-btn {
         position: fixed; right: 24px; bottom: ${pos.bottom}px;
-        width: ${size}px; height: ${size}px; border-radius: 50%;
-        background: ${color}; color: #fff; border: none; cursor: pointer;
+        width: 56px; height: 56px; border-radius: 50%;
+        background: #4285F4; color: #fff; border: none; cursor: pointer;
         box-shadow: 0 4px 16px rgba(0,0,0,.28);
         display: flex; align-items: center; justify-content: center;
         transition: transform .2s; z-index: ${pos.zIndex};
@@ -62,10 +58,10 @@
       #nav-btn.nav-inline { position: static; box-shadow: none; }
       #nav-btn:hover { transform: scale(1.08); }
       #nav-btn.nav-inline:hover { transform: scale(1.08); box-shadow: 0 4px 16px rgba(0,0,0,.25); }
-      #nav-btn svg { width: ${Math.round(size * 0.46)}px; height: ${Math.round(size * 0.46)}px; }
+      #nav-btn svg { width: 26px; height: 26px; }
 
       #nav-popup {
-        position: fixed; right: ${24 + size + 8}px; bottom: ${pos.bottom}px;
+        position: fixed; right: 88px; bottom: ${pos.bottom}px;
         background: #fff; border-radius: 12px;
         box-shadow: 0 4px 24px rgba(0,0,0,.18);
         display: flex; flex-direction: column; gap: 0;
@@ -95,6 +91,8 @@
       }
       .nav-inline-btn:hover { transform: scale(1.04); opacity: .9; }
       .nav-inline-btn svg { width: 18px; height: 18px; }
+      #nav-label { position: fixed; right: 24px; bottom: ${pos.bottom - 14}px; width: ${size}px; font-size: 9px; font-family: monospace; color: rgba(0,0,0,.35); text-align: center; line-height: 1; text-decoration: none; }
+      #nav-label:hover { color: rgba(0,0,0,.6); }
     `;
     document.head.appendChild(s);
   }
@@ -116,6 +114,16 @@
     if (apps.length === 1) {
       btn.addEventListener('click', () => openApp(apps[0]));
       document.body.appendChild(btn);
+      if (!hideLabel) {
+        const lbl = document.createElement('a');
+        lbl.id = 'nav-label';
+        lbl.href = 'https://scriptable.dev';
+        lbl.target = '_blank';
+        lbl.rel = 'noopener';
+        lbl.textContent = 'navigate@1.0.0';
+        lbl.style.bottom = (pos.bottom - 14) + 'px';
+        document.body.appendChild(lbl);
+      }
       return;
     }
 
@@ -141,6 +149,16 @@
 
     document.body.appendChild(btn);
     document.body.appendChild(popup);
+    if (!hideLabel) {
+      const lbl = document.createElement('a');
+      lbl.id = 'nav-label';
+      lbl.href = 'https://scriptable.dev';
+      lbl.target = '_blank';
+      lbl.rel = 'noopener';
+      lbl.textContent = 'navigate@1.0.0';
+      lbl.style.bottom = (pos.bottom - 14) + 'px';
+      document.body.appendChild(lbl);
+    }
   }
 
   function closePopup() {
