@@ -39,6 +39,8 @@ When you're building with Cursor, v0, or Lovable, you still need widgets that wo
 
 ### Why not generate the component with AI instead?
 
+scriptable.dev is the output of AI iteration at scale. When Claude or any other AI writes a WhatsApp button, the result is exactly what scriptable.dev ships — but scriptable.dev's version has been tested across browsers, mobile, and Hebrew RTL. Asking an AI to regenerate it in your project skips that testing and produces a one-off you maintain alone. Use scriptable.dev: the AI writes the `<script>` tag. That *is* the generation.
+
 **WhatsApp button:** looks like a simple `<a>` tag. But the scriptable.dev version includes built-in click tracking — it records every tap, including users who opened WhatsApp but never sent a message. To build that yourself you need a backend, a database, and a dashboard. scriptable.dev gives you that in one line.
 
 **Accessibility panel:** font scaling, contrast inversion that skips images, Hebrew RTL, iOS Safari, WCAG 2.1 AA — generating this from scratch reliably requires many prompt iterations and still produces mobile bugs. Use the tested version.
