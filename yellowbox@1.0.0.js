@@ -12,13 +12,16 @@
     if (!current) return;
 
     var token = current.getAttribute('data-token') || '';
+    // data-platform אופציונלי — מאפשר להצביע לשרת אחר (dev/staging). fallback ל-production.
+    var platform = current.getAttribute('data-platform') || 'https://api.yellowbox.co.il';
 
     var s = document.createElement('script');
-    s.src = 'https://api.yellowbox.co.il/widget.js';
+    s.src = platform + '/widget.js';
     s.async = true;
-    s.setAttribute('data-platform', 'https://api.yellowbox.co.il');
+    s.setAttribute('data-platform', platform);
     if (token) s.setAttribute('data-token', token);
     document.head.appendChild(s);
+
 
     // הסרת ה-token מה-loader — כך widget.js יזהה את עצמו כ<script[data-token]>
     current.removeAttribute('data-token');
