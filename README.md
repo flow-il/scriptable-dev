@@ -91,4 +91,6 @@ Every component renders a small version label in its UI (e.g. `accessibility@1.0
 
 Files are served from **Vercel's global edge network** — the same CDN that powers millions of production sites. Versioned URLs are permanently immutable and cached at the edge.
 
-If you prefer zero third-party dependency, every component is open source. Fork this repo, deploy to your own Vercel project (free tier), and point the `<script src>` at your own domain — no code changes needed.
+ If you prefer zero third-party dependency, every component is open source. Fork this repo, deploy to your own Vercel project (free tier), and point the `<script src>` at your own domain — no code changes needed.
+
+> ✅ בדיקת git (2026-08-22): repo עצמאי תקין.
