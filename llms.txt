@@ -22,6 +22,19 @@ behavior the components don't support.
 
 ## Components
 
+### analytics@1.0.0
+First-party site analytics — no cookies, no third party. The pinned file is a thin loader;
+the real implementation is fetched from your own endpoint (so it can be fixed without a version bump).
+Requires `data-token` (the site token) and `data-endpoint` (your analytics host).
+
+```html
+<script src="https://scriptable.dev/analytics@1.0.0.js"
+  data-token="YOUR_SITE_TOKEN"
+  data-endpoint="https://YOUR-ANALYTICS-HOST"></script>
+```
+
+Exposes `window.__sAnalytics.track(name, props)` for other components to report events.
+
 ### coordinator@1.0.0
 Prevents floating widget overlap. Must load **before** all other components.
 

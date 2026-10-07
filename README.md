@@ -12,6 +12,11 @@ Free, versioned web components for Israeli websites. Drop in a single `<script>`
 <!-- Accessibility panel (WCAG 2.1 compliant, Hebrew RTL) -->
 <script src="https://scriptable.dev/accessibility@1.0.0.js"></script>
 
+<!-- Analytics (first-party, no cookies) — reports to your own endpoint -->
+<script src="https://scriptable.dev/analytics@1.0.0.js"
+  data-token="YOUR_SITE_TOKEN"
+  data-endpoint="https://YOUR-ANALYTICS-HOST"></script>
+
 <!-- WhatsApp button (coming soon) -->
 <script src="https://scriptable.dev/whatsapp@1.0.0.js" data-phone="972501234567"></script>
 ```
@@ -21,6 +26,7 @@ Free, versioned web components for Israeli websites. Drop in a single `<script>`
 | Component | Version | Description |
 |-----------|---------|-------------|
 | `accessibility` | `1.0.0` | Accessibility panel — font size, contrast, RTL support |
+| `analytics` | `1.0.0` | First-party site analytics — no cookies, no third party |
 | `chat` | `1.0.0` | Live chat widget — connects to [YellowBox](https://flow-il.com) |
 | `whatsapp` | coming soon | WhatsApp floating button |
 
