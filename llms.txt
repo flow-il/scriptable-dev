@@ -43,7 +43,7 @@ The chat widget (connects to a YellowBox account). **One line per site** — eve
 Chat and measurement are **independent**: omit `data-analytics` for chat without measurement;
 for measurement *without* chat use `analytics@1.0.1.js` instead.
 
-⚠️ `yellowbox@1.0.1.js` ignores `data-analytics` (the loader didn't pass it through) —
+⚠️ `yellowbox@1.0.0.js` ignores `data-analytics` (the loader didn't pass it through) —
 use `1.0.1`.
 
 Load **after** `coordinator@1.0.1.js` so its floating button stacks with the other widgets.
@@ -74,7 +74,7 @@ This is the component for **measurement without the chat widget** (no chat bubbl
 
 Exposes `window.__sAnalytics.track(name, props)` for other components to report events.
 
-### coordinator@1.0.0
+### coordinator@1.0.1
 Prevents floating widget overlap. Must load **before** all other components.
 
 ```html

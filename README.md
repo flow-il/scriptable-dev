@@ -26,8 +26,8 @@ Free, versioned web components for Israeli websites. Drop in a single `<script>`
 | Component | Version | Description |
 |-----------|---------|-------------|
 | `accessibility` | `1.0.0` | Accessibility panel — font size, contrast, RTL support |
-| `analytics` | `1.0.0` | First-party site analytics — no cookies, no third party |
-| `chat` | `1.0.0` | Live chat widget — connects to [YellowBox](https://flow-il.com) |
+| `analytics` | `1.0.1` | First-party site analytics — no cookies, no third party |
+| `chat` | `1.0.1` | Live chat widget — connects to [YellowBox](https://flow-il.com) |
 | `whatsapp` | coming soon | WhatsApp floating button |
 
 ## Versioning
