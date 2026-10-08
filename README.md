@@ -13,7 +13,7 @@ Free, versioned web components for Israeli websites. Drop in a single `<script>`
 <script src="https://scriptable.dev/accessibility@1.0.0.js"></script>
 
 <!-- Analytics (first-party, no cookies) — reports to your own endpoint -->
-<script src="https://scriptable.dev/analytics@1.0.0.js"
+<script src="https://scriptable.dev/analytics@1.0.1.js"
   data-token="YOUR_SITE_TOKEN"
   data-endpoint="https://YOUR-ANALYTICS-HOST"></script>
 
@@ -84,7 +84,7 @@ Add a WhatsApp floating button (match brand color #FF6B00, hide version label):
 
 ```
 Prevent widget overlap (accessibility + WhatsApp + any other floating widget):
-<script src="https://scriptable.dev/coordinator@1.0.0.js"></script>
+<script src="https://scriptable.dev/coordinator@1.0.1.js"></script>
 ```
 
 The coordinator handles positioning automatically — no prompts needed when adding more widgets later.
