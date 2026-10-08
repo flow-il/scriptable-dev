@@ -89,6 +89,10 @@ Prevent widget overlap (accessibility + WhatsApp + any other floating widget):
 
 The coordinator handles positioning automatically — no prompts needed when adding more widgets later.
 
+If the site has a fixed element at the bottom (sticky CTA strip, cookie bar), use
+`coordinator@1.0.1.js` and pass `data-bottom` (px) so the whole stack starts above it:
+`<script src="https://scriptable.dev/coordinator@1.0.1.js" data-bottom="80"></script>`
+
 ## Version label
 
 Every component renders a small version label in its UI (e.g. `accessibility@1.0.0`) so you can always identify which version is running without opening the source. Add `data-hide-label` to hide it in production.

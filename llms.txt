@@ -42,6 +42,14 @@ Prevents floating widget overlap. Must load **before** all other components.
 <script src="https://scriptable.dev/coordinator@1.0.0.js"></script>
 ```
 
+### coordinator@1.0.1
+זהה ל-1.0.0, ובנוסף `data-bottom` — היסט התחלתי מהתחתית, לאתרים שיש להם אלמנט קבוע
+בתחתית המסך (רצועת CTA צפה, באנר עוגיות). ברירת המחדל נשארת 24.
+
+```html
+<script src="https://scriptable.dev/coordinator@1.0.1.js" data-bottom="80"></script>
+```
+
 ### accessibility@1.0.0
 Accessibility panel — font size, contrast, grayscale, RTL. Hebrew UI.
 
@@ -88,6 +96,10 @@ Every floating component supports these parameters:
 
 Coordinator also accepts `data-size` as a **global default** for all registered buttons.
 Individual `data-size` on a component overrides the coordinator's global.
+
+`coordinator@1.0.1` also accepts `data-bottom` (px, default `24`) — a starting offset from the
+bottom edge. Use it when the site has a fixed element at the bottom (sticky CTA strip, cookie
+bar): the **whole stack** shifts up, so buttons, panels and tooltips stay aligned with each other.
 
 ## Component parameters
 
