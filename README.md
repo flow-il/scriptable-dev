@@ -6,7 +6,7 @@ Free, versioned web components for Israeli websites. Drop in a single `<script>`
 
 ```html
 <!-- Chat widget (connects to your YellowBox account) + first-party measurement -->
-<script src="https://scriptable.dev/yellowbox@1.0.0.js" data-token="YOUR_TOKEN" data-analytics></script>
+<script src="https://scriptable.dev/yellowbox@1.0.1.js" data-token="YOUR_TOKEN" data-analytics></script>
 
 
 <!-- Accessibility panel (WCAG 2.1 compliant, Hebrew RTL) -->

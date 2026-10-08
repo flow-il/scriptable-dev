@@ -22,12 +22,12 @@ behavior the components don't support.
 
 ## Components
 
-### yellowbox@1.0.0
+### yellowbox@1.0.1
 The chat widget (connects to a YellowBox account). **One line per site** — everything else
 (positioning, measurement host) is fetched from the platform.
 
 ```html
-<script src="https://scriptable.dev/yellowbox@1.0.0.js"
+<script src="https://scriptable.dev/yellowbox@1.0.1.js"
   data-token="YOUR_SITE_TOKEN"
   data-platform="https://api.yellowbox.co.il"
   data-analytics></script>
@@ -40,15 +40,31 @@ The chat widget (connects to a YellowBox account). **One line per site** — eve
 | `data-analytics` | Also load first-party measurement. The analytics host comes **from the platform**, never from your HTML — switching environments doesn't touch the site. Omit for chat without measurement |
 | `data-analytics-endpoint` | Optional: override the analytics host |
 
+Chat and measurement are **independent**: omit `data-analytics` for chat without measurement;
+for measurement *without* chat use `analytics@1.0.1.js` instead.
+
+⚠️ `yellowbox@1.0.0.js` ignores `data-analytics` (the loader didn't pass it through) —
+use `1.0.1`.
+
 Load **after** `coordinator@1.0.1.js` so its floating button stacks with the other widgets.
 
-### analytics@1.0.0
+### analytics@1.0.1
 First-party site analytics — no cookies, no third party. The pinned file is a thin loader;
-the real implementation is fetched from your own endpoint (so it can be fixed without a version bump).
-Requires `data-token` (the site token) and `data-endpoint` (your analytics host).
+the real implementation is fetched from your service (so it can be fixed without a version bump).
 
-Use this tag **only** for measurement *without* the chat widget. With the chat widget, pass
-`data-analytics` there instead — one line, and no endpoint in your HTML.
+This is the component for **measurement without the chat widget** (no chat bubble).
+
+```html
+<script src="https://scriptable.dev/analytics@1.0.1.js"
+  data-token="YOUR_SITE_TOKEN"
+  data-platform="https://api.yellowbox.co.il"></script>
+```
+
+| Attribute | Description |
+|-----------|-------------|
+| `data-token` | The site token (required) |
+| `data-platform` | Resolves the analytics host from the platform — **recommended**: no internal domain in your HTML |
+| `data-endpoint` | Explicit analytics host (alternative to `data-platform`) |
 
 ```html
 <script src="https://scriptable.dev/analytics@1.0.0.js"
