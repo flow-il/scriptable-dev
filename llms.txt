@@ -22,10 +22,33 @@ behavior the components don't support.
 
 ## Components
 
+### yellowbox@1.0.0
+The chat widget (connects to a YellowBox account). **One line per site** — everything else
+(positioning, measurement host) is fetched from the platform.
+
+```html
+<script src="https://scriptable.dev/yellowbox@1.0.0.js"
+  data-token="YOUR_SITE_TOKEN"
+  data-platform="https://api.yellowbox.co.il"
+  data-analytics></script>
+```
+
+| Attribute | Description |
+|-----------|-------------|
+| `data-token` | The site token — identifies which site/business this is |
+| `data-platform` | The chat platform host (defaults to the loader's origin) |
+| `data-analytics` | Also load first-party measurement. The analytics host comes **from the platform**, never from your HTML — switching environments doesn't touch the site. Omit for chat without measurement |
+| `data-analytics-endpoint` | Optional: override the analytics host |
+
+Load **after** `coordinator@1.0.1.js` so its floating button stacks with the other widgets.
+
 ### analytics@1.0.0
 First-party site analytics — no cookies, no third party. The pinned file is a thin loader;
 the real implementation is fetched from your own endpoint (so it can be fixed without a version bump).
 Requires `data-token` (the site token) and `data-endpoint` (your analytics host).
+
+Use this tag **only** for measurement *without* the chat widget. With the chat widget, pass
+`data-analytics` there instead — one line, and no endpoint in your HTML.
 
 ```html
 <script src="https://scriptable.dev/analytics@1.0.0.js"
