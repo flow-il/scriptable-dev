@@ -22,14 +22,14 @@ behavior the components don't support.
 
 ## Components
 
-### yellowbox@1.0.1
-The chat widget (connects to a YellowBox account). **One line per site** — everything else
+### bidex@1.0.1
+The chat widget (connects to a Bidex account). **One line per site** — everything else
 (positioning, measurement host) is fetched from the platform.
 
 ```html
-<script src="https://scriptable.dev/yellowbox@1.0.1.js"
+<script src="https://scriptable.dev/bidex@1.0.1.js"
   data-token="YOUR_SITE_TOKEN"
-  data-platform="https://api.yellowbox.co.il"
+  data-platform="https://api.bidex.co.il"
   data-analytics></script>
 ```
 
@@ -43,7 +43,7 @@ The chat widget (connects to a YellowBox account). **One line per site** — eve
 Chat and measurement are **independent**: omit `data-analytics` for chat without measurement;
 for measurement *without* chat use `analytics@1.0.1.js` instead.
 
-⚠️ `yellowbox@1.0.0.js` ignores `data-analytics` (the loader didn't pass it through) —
+⚠️ `bidex@1.0.0.js` ignores `data-analytics` (the loader didn't pass it through) —
 use `1.0.1`.
 
 Load **after** `coordinator@1.0.1.js` so its floating button stacks with the other widgets.
@@ -57,7 +57,7 @@ This is the component for **measurement without the chat widget** (no chat bubbl
 ```html
 <script src="https://scriptable.dev/analytics@1.0.1.js"
   data-token="YOUR_SITE_TOKEN"
-  data-platform="https://api.yellowbox.co.il"></script>
+  data-platform="https://api.bidex.co.il"></script>
 ```
 
 | Attribute | Description |
@@ -130,8 +130,8 @@ Every floating component supports these parameters:
 | `data-size` | number | `56` | Button diameter in px |
 | `data-color` | hex string | component default | Main button background color |
 | `data-no-coordinator` | attribute (no value) | — | Bypass coordinator — use component's own fixed position |
-| `data-hide-label` | attribute (no value) | — | Hide version label — whatsapp, navigate, share only (accessibility and yellowbox always show it) |
-| `data-hide-label` | attribute (no value) | — | Hide version label — whatsapp, navigate, share only (accessibility and yellowbox always show it) |
+| `data-hide-label` | attribute (no value) | — | Hide version label — whatsapp, navigate, share only (accessibility and bidex always show it) |
+| `data-hide-label` | attribute (no value) | — | Hide version label — whatsapp, navigate, share only (accessibility and bidex always show it) |
 
 Coordinator also accepts `data-size` as a **global default** for all registered buttons.
 Individual `data-size` on a component overrides the coordinator's global.
