@@ -5,8 +5,8 @@ Free, versioned web components for Israeli websites. Drop in a single `<script>`
 ## Usage
 
 ```html
-<!-- Chat widget (connects to your YellowBox account) + first-party measurement -->
-<script src="https://scriptable.dev/yellowbox@1.0.1.js" data-token="YOUR_TOKEN" data-analytics></script>
+<!-- Chat widget (connects to your Bidex account) + first-party measurement -->
+<script src="https://scriptable.dev/bidex@1.0.1.js" data-token="YOUR_TOKEN" data-analytics></script>
 
 
 <!-- Accessibility panel (WCAG 2.1 compliant, Hebrew RTL) -->
@@ -27,7 +27,7 @@ Free, versioned web components for Israeli websites. Drop in a single `<script>`
 |-----------|---------|-------------|
 | `accessibility` | `1.0.0` | Accessibility panel — font size, contrast, RTL support |
 | `analytics` | `1.0.1` | First-party site analytics — no cookies, no third party |
-| `chat` | `1.0.1` | Live chat widget — connects to [YellowBox](https://flow-il.com) |
+| `chat` | `1.0.1` | Live chat widget — connects to [Bidex](https://flow-il.com) |
 | `whatsapp` | coming soon | WhatsApp floating button |
 
 ## Versioning

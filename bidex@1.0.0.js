@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  // yellowbox@1.0.0.js — Loader דק.
+  // bidex@1.0.0.js — Loader דק.
   // ה-widget האמיתי חי ב-server: https://api.bidex.co.il/widget.js (מקור יחיד).
   // יוצר <script> שמוריד את ה-widget, מעביר אליו data-token + data-platform,
   // ומסיר את ה-data-token מה-loader כדי ש-querySelector('script[data-token]')
@@ -8,7 +8,7 @@
   // תואם לקורדינטור (coordinator@1.0.0.js).
 
   function loadWidget() {
-    var current = document.currentScript || document.querySelector('script[src*="yellowbox@"]');
+    var current = document.currentScript || document.querySelector('script[src*="bidex@"]');
     if (!current) return;
 
     var token = current.getAttribute('data-token') || '';

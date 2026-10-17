@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  // yellowbox@1.0.1.js — Loader דק.
+  // bidex@1.0.1.js — Loader דק.
   // ה-widget האמיתי חי ב-server: https://api.bidex.co.il/widget.js (מקור יחיד).
   //
   // 1.0.1: מעביר הלאה גם את דגלי המדידה (data-analytics / data-analytics-endpoint).
@@ -13,7 +13,7 @@
   var PASS_THROUGH = ['data-analytics', 'data-analytics-endpoint'];
 
   function loadWidget() {
-    var current = document.currentScript || document.querySelector('script[src*="yellowbox@"]');
+    var current = document.currentScript || document.querySelector('script[src*="bidex@"]');
     if (!current) return;
 
     var token = current.getAttribute('data-token') || '';
