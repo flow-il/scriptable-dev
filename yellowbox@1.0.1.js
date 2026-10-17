@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   // yellowbox@1.0.1.js — Loader דק.
-  // ה-widget האמיתי חי ב-server: https://api.yellowbox.co.il/widget.js (מקור יחיד).
+  // ה-widget האמיתי חי ב-server: https://api.bidex.co.il/widget.js (מקור יחיד).
   //
   // 1.0.1: מעביר הלאה גם את דגלי המדידה (data-analytics / data-analytics-endpoint).
   // ב-1.0.0 הם לא עברו ל-widget — ולכן `data-analytics` לא עשה כלום: ה-widget קורא
@@ -18,7 +18,7 @@
 
     var token = current.getAttribute('data-token') || '';
     // data-platform אופציונלי — מאפשר להצביע לשרת אחר (dev/staging). fallback ל-production.
-    var platform = current.getAttribute('data-platform') || 'https://api.yellowbox.co.il';
+    var platform = current.getAttribute('data-platform') || 'https://api.bidex.co.il';
 
     var s = document.createElement('script');
     s.src = platform + '/widget.js';

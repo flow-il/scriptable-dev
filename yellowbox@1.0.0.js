@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   // yellowbox@1.0.0.js — Loader דק.
-  // ה-widget האמיתי חי ב-server: https://api.yellowbox.co.il/widget.js (מקור יחיד).
+  // ה-widget האמיתי חי ב-server: https://api.bidex.co.il/widget.js (מקור יחיד).
   // יוצר <script> שמוריד את ה-widget, מעביר אליו data-token + data-platform,
   // ומסיר את ה-data-token מה-loader כדי ש-querySelector('script[data-token]')
   // בתוך ה-widget ימצא את ה-widget עצמו (ולא את ה-loader) — וכך נגזר ה-URL הנכון.
@@ -13,7 +13,7 @@
 
     var token = current.getAttribute('data-token') || '';
     // data-platform אופציונלי — מאפשר להצביע לשרת אחר (dev/staging). fallback ל-production.
-    var platform = current.getAttribute('data-platform') || 'https://api.yellowbox.co.il';
+    var platform = current.getAttribute('data-platform') || 'https://api.bidex.co.il';
 
     var s = document.createElement('script');
     s.src = platform + '/widget.js';
