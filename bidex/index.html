@@ -141,11 +141,40 @@
       <table>
         <tr><th>שם</th><th>חובה?</th><th>תיאור</th></tr>
         <tr><td>data-token</td><td><span class="req">●</span> חובה</td><td>Widget token מ-<a href="https://bizapp.bidex.co.il" rel="noopener noreferrer" target="_blank" style="color:var(--green)">bizapp.bidex.co.il</a></td></tr>
+        <tr><td>data-platform</td><td>—</td><td>שרת אחר (dev/staging). ברירת מחדל: <code style="font-family:monospace;color:var(--code-text)">https://api.bidex.co.il</code></td></tr>
+        <tr><td>data-analytics</td><td>—</td><td>מפעיל מדידה first-party</td></tr>
+        <tr><td>data-embed</td><td>—</td><td><code style="font-family:monospace;color:var(--code-text)">panel</code> — הווידג'ט נטמע כחלונית inline במקום כפתור צף (1.1.0)</td></tr>
+        <tr><td>data-page</td><td>—</td><td>טוען רק בעמוד הזה, למשל <code style="font-family:monospace;color:var(--code-text)">/contact</code> (1.1.0)</td></tr>
+        <tr><td>data-container</td><td>—</td><td>סלקטור להטמעה בתוך אלמנט קיים, למשל <code style="font-family:monospace;color:var(--code-text)">#chat-box</code> (1.1.0)</td></tr>
       </table>
     </section>
 
     <section>
+      <h2>הטמעה בעמוד ספציפי (1.1.0)</h2>
+      <div class="code-wrap">
+        <pre id="code-embed">&lt;script src="https://scriptable.dev/bidex@1.1.0.js"
+        data-token="YOUR_TOKEN"
+        data-embed="panel"
+        data-page="/contact"
+        async&gt;&lt;/script&gt;</pre>
+        <button class="copy-btn" onclick="copy('code-embed', this)">העתק</button>
+      </div>
+    </section>
+
+    <section>
       <h2>Changelog</h2>
+      <div class="changelog-entry">
+        <div class="changelog-date">2026-11-12</div>
+        <div class="changelog-content">
+          <div class="changelog-version">v1.1.0 — הטמעה</div>
+          <ul class="changelog-list">
+            <li><code style="font-family:monospace;color:var(--code-text)">data-embed="panel"</code> — חלונית inline במקום כפתור צף</li>
+            <li><code style="font-family:monospace;color:var(--code-text)">data-page</code> — טוען רק בעמוד מסוים</li>
+            <li><code style="font-family:monospace;color:var(--code-text)">data-container</code> — הטמעה בתוך אלמנט קיים</li>
+            <li>ברירת מחדל = התנהגות 1.0.1 — אפס שבירה</li>
+          </ul>
+        </div>
+      </div>
       <div class="changelog-entry">
         <div class="changelog-date">2026-08-08</div>
         <div class="changelog-content">
