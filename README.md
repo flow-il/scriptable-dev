@@ -70,6 +70,25 @@ scriptable.dev is the output of AI iteration at scale. When Claude or any other 
 
 All components support `data-color`, `data-size`, and `data-hide-label`. No CSS overrides needed.
 
+## What's new in 1.1.0
+
+New minor versions (opt-in — old URLs stay immutable and keep working):
+
+- **`coordinator@1.1.0`** — free styling + hide/show:
+  - `data-style` — raw CSS string applied to every widget button (transparency, color, radius — anything you'd put on a DIV).
+  - `data-color` / `data-padding` / `data-radius` / `data-opacity` / `data-gap` — shortcuts.
+  - `YBCoordinator.hide(id)` / `YBCoordinator.show(id)` — hide/show a widget and re-stack the rest.
+- **`accessibility@1.1.0`** — collapse:
+  - A `«` button in the panel collapses the floating button into a slim strip with `>` (still visible, less intrusive). Clicking `>` restores the circle. State persists across visits.
+  - `data-shrink` — collapsed strip width in px (default 24). `data-collapsed` — start collapsed.
+  - Works inside the coordinator (default) or standalone (`data-no-coordinator`).
+- **`bidex@1.1.0`** — embed:
+  - `data-embed="panel"` — render the chat inline instead of a floating button.
+  - `data-page="/contact"` — load only on that page (pathname match).
+  - `data-container="#chat-box"` — embed into a specific element.
+
+Defaults never change — omitting every new attribute keeps 1.0.x behavior exactly.
+
 ### Recommended prompt pattern
 
 ```
