@@ -71,7 +71,7 @@
       #a11y-header { background: #1a1a1a; border-radius: 16px 16px 0 0; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; }
       #a11y-panel #a11y-header-title { color: #fff; font-size: 14px !important; font-weight: 600; }
       #a11y-header-actions { display: flex; align-items: center; gap: 4px; }
-      #a11y-close { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: none; border: none; color: #a1a1aa; cursor: pointer; font-size: 20px; line-height: 1; border-radius: 8px; transition: color .15s, background .15s; }
+      #a11y-close { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: none; border: none; color: #fff; cursor: pointer; font-size: 20px; line-height: 1; border-radius: 8px; transition: color .15s, background .15s; }
       #a11y-close:hover { color: #fff; background: rgba(255,255,255,.12); }
       #a11y-collapse { position: fixed; width: 24px; height: 24px; border-radius: 50%; background: #fff; color: #111; border: 2px solid ${color}; cursor: pointer; font-size: 16px; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,.35); transition: transform .15s; }
       #a11y-collapse:hover { transform: scale(1.15); }
