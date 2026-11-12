@@ -18,7 +18,7 @@
   let state = Object.assign({}, defaults, JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'));
 
   // כיווץ — מתחיל מכווץ אם ביקשו (data-collapsed) או שנשמר כך.
-  let collapsed = !!(script && script.hasAttribute('data-collapsed')) || localStorage.getItem(COLLAPSE_KEY) === '1';
+  let collapsed = noCoordinator && (!!(script && script.hasAttribute('data-collapsed')) || localStorage.getItem(COLLAPSE_KEY) === '1');
 
   const pos = (!noCoordinator && window.YBCoordinator)
     ? window.YBCoordinator.register('a11y', { side: 'left', size: size })
@@ -65,7 +65,7 @@
 
       #a11y-btn { position: fixed; left: 24px; width: ${size}px; height: ${size}px; border-radius: 50%; background: ${color}; color: #fff; border: none; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.35); transition: width .2s, border-radius .2s, transform .2s; display: flex; align-items: center; justify-content: center; overflow: hidden; }
       #a11y-btn:hover { transform: scale(1.08); }
-      #a11y-btn[data-collapsed="true"] { width: ${shrinkWidth}px; border-radius: 999px; }
+      #a11y-btn[data-collapsed="true"] { width: ${shrinkWidth}px; left: 0; border-radius: 0 8px 8px 0; }
       #a11y-btn[data-collapsed="true"]:hover { transform: none; }
       #a11y-panel { position: fixed; left: 24px; background: #fff; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,.18); width: 260px; direction: rtl; max-height: calc(100vh - 200px); overflow-y: auto; font-family: system-ui, -apple-system, sans-serif; }
       #a11y-header { background: #1a1a1a; border-radius: 16px 16px 0 0; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; }
@@ -104,13 +104,17 @@
     btn.innerHTML = ICON_ACCESSIBILITY;
     applyCoordStyle(btn);
 
-    // כפתור כיווץ — גלוי על העיגול הצף עצמו (לא בתוך הפאנל).
-    const collapseBtn = document.createElement('button');
-    collapseBtn.id = 'a11y-collapse';
-    collapseBtn.title = 'כווץ';
-    collapseBtn.setAttribute('aria-label', 'כווץ');
-    collapseBtn.innerHTML = '«';
-    document.body.appendChild(collapseBtn);
+    // כפתור כיווץ — רק מחוץ לקואורדינטור. בקואורדינטור אין משמעות לכיווץ:
+    // הקואורדינטור מנהל את המיקום (מחסנית), ואי אפשר "לנפוק" לקצה תוך כדי.
+    let collapseBtn = null;
+    if (noCoordinator) {
+      collapseBtn = document.createElement('button');
+      collapseBtn.id = 'a11y-collapse';
+      collapseBtn.title = 'כווץ';
+      collapseBtn.setAttribute('aria-label', 'כווץ');
+      collapseBtn.innerHTML = '«';
+      document.body.appendChild(collapseBtn);
+    }
 
     const panel = document.createElement('div');
     panel.id = 'a11y-panel';
@@ -154,20 +158,23 @@
     document.body.appendChild(panel);
     btn.style.bottom = pos.bottom + 'px';
     btn.style.zIndex = pos.zIndex;
-    collapseBtn.style.left = (24 + size - 12) + 'px';
-    collapseBtn.style.bottom = (pos.bottom + size - 12) + 'px';
-    collapseBtn.style.zIndex = pos.zIndex + 1;
+    if (collapseBtn) {
+      collapseBtn.style.left = (24 + size - 12) + 'px';
+      collapseBtn.style.bottom = (pos.bottom + size - 12) + 'px';
+      collapseBtn.style.zIndex = pos.zIndex + 1;
+    }
     const panelBottom = window.YBCoordinator ? window.YBCoordinator.getStackTop('left') + 8 : pos.bottom + 56 + 10;
     panel.style.bottom = panelBottom + 'px';
     panel.style.zIndex = pos.zIndex + 1;
 
     /** מציג את הכפתור לפי מצב הכיווץ (עיגול ↔ רצועה). */
     function renderCollapsed() {
-      btn.dataset.collapsed = collapsed ? 'true' : 'false';
-      btn.innerHTML = collapsed ? ICON_CHEVRON : ICON_ACCESSIBILITY;
-      btn.title = collapsed ? 'הרחב נגישות' : 'נגישות';
-      btn.setAttribute('aria-label', collapsed ? 'הרחב נגישות' : 'נגישות');
-      collapseBtn.hidden = collapsed;
+      const isCollapsed = noCoordinator && collapsed;
+      btn.dataset.collapsed = isCollapsed ? 'true' : 'false';
+      btn.innerHTML = isCollapsed ? ICON_CHEVRON : ICON_ACCESSIBILITY;
+      btn.title = isCollapsed ? 'הרחב נגישות' : 'נגישות';
+      btn.setAttribute('aria-label', isCollapsed ? 'הרחב נגישות' : 'נגישות');
+      if (collapseBtn) collapseBtn.hidden = isCollapsed;
     }
     renderCollapsed();
 
@@ -185,13 +192,15 @@
     document.addEventListener('ybwidget:open', function (e) { if (e.detail.id !== 'a11y') panel.hidden = true; });
     panel.querySelector('#a11y-close').addEventListener('click', () => { panel.hidden = true; });
 
-    // כיווץ — סוגר את הפאנל ומכווץ את הכפתור לרצועה.
-    collapseBtn.addEventListener('click', () => {
-      collapsed = true;
-      localStorage.setItem(COLLAPSE_KEY, '1');
-      panel.hidden = true;
-      renderCollapsed();
-    });
+    // כיווץ — סוגר את הפאנל ומכווץ את הכפתור לרצועה בקצה המסך.
+    if (collapseBtn) {
+      collapseBtn.addEventListener('click', () => {
+        collapsed = true;
+        localStorage.setItem(COLLAPSE_KEY, '1');
+        panel.hidden = true;
+        renderCollapsed();
+      });
+    }
 
     panel.querySelectorAll('[data-size]').forEach(b => {
       if (parseInt(b.dataset.size) === state.fontSize) b.classList.add('active');
