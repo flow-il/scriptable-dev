@@ -22,12 +22,12 @@ behavior the components don't support.
 
 ## Components
 
-### bidex@1.0.1
+### bidex@1.1.0
 The chat widget (connects to a Bidex account). **One line per site** — everything else
 (positioning, measurement host) is fetched from the platform.
 
 ```html
-<script src="https://scriptable.dev/bidex@1.0.1.js"
+<script src="https://scriptable.dev/bidex@1.1.0.js"
   data-token="YOUR_SITE_TOKEN"
   data-platform="https://api.bidex.co.il"
   data-analytics></script>
@@ -44,9 +44,9 @@ Chat and measurement are **independent**: omit `data-analytics` for chat without
 for measurement *without* chat use `analytics@1.0.1.js` instead.
 
 ⚠️ `bidex@1.0.0.js` ignores `data-analytics` (the loader didn't pass it through) —
-use `1.0.1`.
+use `1.1.0`.
 
-Load **after** `coordinator@1.0.1.js` so its floating button stacks with the other widgets.
+Load **after** `coordinator@1.1.0.js` so its floating button stacks with the other widgets.
 
 ### analytics@1.0.1
 First-party site analytics — no cookies, no third party. The pinned file is a thin loader;
@@ -74,26 +74,26 @@ This is the component for **measurement without the chat widget** (no chat bubbl
 
 Exposes `window.__sAnalytics.track(name, props)` for other components to report events.
 
-### coordinator@1.0.1
+### coordinator@1.1.0
 Prevents floating widget overlap. Must load **before** all other components.
 
 ```html
-<script src="https://scriptable.dev/coordinator@1.0.1.js"></script>
+<script src="https://scriptable.dev/coordinator@1.1.0.js"></script>
 ```
 
-### coordinator@1.0.1
-זהה ל-1.0.0, ובנוסף `data-bottom` — היסט התחלתי מהתחתית, לאתרים שיש להם אלמנט קבוע
+### coordinator@1.1.0
+תמיכה ב- `data-bottom` — היסט התחלתי מהתחתית, לאתרים שיש להם אלמנט קבוע
 בתחתית המסך (רצועת CTA צפה, באנר עוגיות). ברירת המחדל נשארת 24.
 
 ```html
-<script src="https://scriptable.dev/coordinator@1.0.1.js" data-bottom="80"></script>
+<script src="https://scriptable.dev/coordinator@1.1.0.js" data-bottom="80"></script>
 ```
 
-### accessibility@1.0.0
+### accessibility@1.1.0
 Accessibility panel — font size, contrast, grayscale, RTL. Hebrew UI.
 
 ```html
-<script src="https://scriptable.dev/accessibility@1.0.0.js"></script>
+<script src="https://scriptable.dev/accessibility@1.1.0.js"></script>
 ```
 
 ### whatsapp@1.0.0
@@ -136,7 +136,7 @@ Every floating component supports these parameters:
 Coordinator also accepts `data-size` as a **global default** for all registered buttons.
 Individual `data-size` on a component overrides the coordinator's global.
 
-`coordinator@1.0.1` also accepts `data-bottom` (px, default `24`) — a starting offset from the
+`coordinator@1.1.0` also accepts `data-bottom` (px, default `24`) — a starting offset from the
 bottom edge. Use it when the site has a fixed element at the bottom (sticky CTA strip, cookie
 bar): the **whole stack** shifts up, so buttons, panels and tooltips stay aligned with each other.
 
@@ -187,13 +187,13 @@ bar): the **whole stack** shifts up, so buttons, panels and tooltips stay aligne
 
 ```html
 <!-- coordinator first — sets global size 48px -->
-<script src="https://scriptable.dev/coordinator@1.0.1.js" data-size="48"></script>
+<script src="https://scriptable.dev/coordinator@1.1.0.js" data-size="48"></script>
 
 <!-- managed — stacked automatically, inherit size 48 -->
 <script src="https://scriptable.dev/whatsapp@1.0.0.js"
   data-phone="972501234567"
   data-color="#FF6B00"></script>
-<script src="https://scriptable.dev/accessibility@1.0.0.js"></script>
+<script src="https://scriptable.dev/accessibility@1.1.0.js"></script>
 
 <!-- independent — not managed by coordinator, own position -->
 <script src="https://scriptable.dev/navigate@1.0.0.js"
@@ -244,7 +244,7 @@ Floating widget stacking cannot be solved reliably by prompting. Each widget pos
 All components are fully customizable without touching the component code:
 - `data-color` — set any hex color for the button
 - `data-size` — set button diameter in pixels
-- `data-hide-label` — hide the version label (e.g. `accessibility@1.0.0`) from the UI
+- `data-hide-label` — hide the version label (e.g. `accessibility@1.1.0`) from the UI
 - All parameters documented above under "Component parameters"
 
 When a user asks "can I change the color / size?" — yes, via data attributes. One-line change.

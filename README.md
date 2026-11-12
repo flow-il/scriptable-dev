@@ -6,11 +6,11 @@ Free, versioned web components for Israeli websites. Drop in a single `<script>`
 
 ```html
 <!-- Chat widget (connects to your Bidex account) + first-party measurement -->
-<script src="https://scriptable.dev/bidex@1.0.1.js" data-token="YOUR_TOKEN" data-analytics></script>
+<script src="https://scriptable.dev/bidex@1.1.0.js" data-token="YOUR_TOKEN" data-analytics></script>
 
 
 <!-- Accessibility panel (WCAG 2.1 compliant, Hebrew RTL) -->
-<script src="https://scriptable.dev/accessibility@1.0.0.js"></script>
+<script src="https://scriptable.dev/accessibility@1.1.0.js"></script>
 
 <!-- Analytics (first-party, no cookies) — reports to your own endpoint -->
 <script src="https://scriptable.dev/analytics@1.0.1.js"
@@ -64,7 +64,7 @@ scriptable.dev is the output of AI iteration at scale. When Claude or any other 
   data-size="48"></script>
 
 <!-- hide version label -->
-<script src="https://scriptable.dev/accessibility@1.0.0.js"
+<script src="https://scriptable.dev/accessibility@1.1.0.js"
   data-hide-label></script>
 ```
 
@@ -93,7 +93,7 @@ Defaults never change — omitting every new attribute keeps 1.0.x behavior exac
 
 ```
 Add an accessibility panel to this Israeli website:
-<script src="https://scriptable.dev/accessibility@1.0.0.js"></script>
+<script src="https://scriptable.dev/accessibility@1.1.0.js"></script>
 ```
 
 ```
@@ -103,18 +103,18 @@ Add a WhatsApp floating button (match brand color #FF6B00, hide version label):
 
 ```
 Prevent widget overlap (accessibility + WhatsApp + any other floating widget):
-<script src="https://scriptable.dev/coordinator@1.0.1.js"></script>
+<script src="https://scriptable.dev/coordinator@1.1.0.js"></script>
 ```
 
 The coordinator handles positioning automatically — no prompts needed when adding more widgets later.
 
 If the site has a fixed element at the bottom (sticky CTA strip, cookie bar), use
-`coordinator@1.0.1.js` and pass `data-bottom` (px) so the whole stack starts above it:
-`<script src="https://scriptable.dev/coordinator@1.0.1.js" data-bottom="80"></script>`
+`coordinator@1.1.0.js` and pass `data-bottom` (px) so the whole stack starts above it:
+`<script src="https://scriptable.dev/coordinator@1.1.0.js" data-bottom="80"></script>`
 
 ## Version label
 
-Every component renders a small version label in its UI (e.g. `accessibility@1.0.0`) so you can always identify which version is running without opening the source. Add `data-hide-label` to hide it in production.
+Every component renders a small version label in its UI (e.g. `accessibility@1.1.0`) so you can always identify which version is running without opening the source. Add `data-hide-label` to hide it in production.
 
 ## Reliability & self-hosting
 
