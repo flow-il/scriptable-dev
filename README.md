@@ -10,7 +10,7 @@ Free, versioned web components for Israeli websites. Drop in a single `<script>`
 
 
 <!-- Accessibility panel (WCAG 2.1 compliant, Hebrew RTL) -->
-<script src="https://scriptable.dev/accessibility@1.1.0.js"></script>
+<script src="https://scriptable.dev/accessibility@1.0.0.js"></script>
 
 <!-- Analytics (first-party, no cookies) — reports to your own endpoint -->
 <script src="https://scriptable.dev/analytics@1.0.1.js"
@@ -64,7 +64,7 @@ scriptable.dev is the output of AI iteration at scale. When Claude or any other 
   data-size="48"></script>
 
 <!-- hide version label -->
-<script src="https://scriptable.dev/accessibility@1.1.0.js"
+<script src="https://scriptable.dev/accessibility@1.0.0.js"
   data-hide-label></script>
 ```
 
@@ -78,7 +78,7 @@ New minor versions (opt-in — old URLs stay immutable and keep working):
   - `data-style` — raw CSS string applied to every widget button (transparency, color, radius — anything you'd put on a DIV).
   - `data-color` / `data-padding` / `data-radius` / `data-opacity` / `data-gap` — shortcuts.
   - `YBCoordinator.hide(id)` / `YBCoordinator.show(id)` — hide/show a widget and re-stack the rest.
-- **`accessibility@1.1.0`** — collapse:
+- **`accessibility@1.0.0`** — collapse:
   - A `«` button in the panel collapses the floating button into a slim strip with `>` (still visible, less intrusive). Clicking `>` restores the circle. State persists across visits.
   - `data-shrink` — collapsed strip width in px (default 24). `data-collapsed` — start collapsed.
   - Works inside the coordinator (default) or standalone (`data-no-coordinator`).
@@ -93,7 +93,7 @@ Defaults never change — omitting every new attribute keeps 1.0.x behavior exac
 
 ```
 Add an accessibility panel to this Israeli website:
-<script src="https://scriptable.dev/accessibility@1.1.0.js"></script>
+<script src="https://scriptable.dev/accessibility@1.0.0.js"></script>
 ```
 
 ```
@@ -114,7 +114,7 @@ If the site has a fixed element at the bottom (sticky CTA strip, cookie bar), us
 
 ## Version label
 
-Every component renders a small version label in its UI (e.g. `accessibility@1.1.0`) so you can always identify which version is running without opening the source. Add `data-hide-label` to hide it in production.
+Every component renders a small version label in its UI (e.g. `accessibility@1.0.0`) so you can always identify which version is running without opening the source. Add `data-hide-label` to hide it in production.
 
 ## Reliability & self-hosting
 
