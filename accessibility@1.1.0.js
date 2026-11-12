@@ -71,8 +71,11 @@
       #a11y-header { background: #1a1a1a; border-radius: 16px 16px 0 0; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; }
       #a11y-panel #a11y-header-title { color: #fff; font-size: 14px !important; font-weight: 600; }
       #a11y-header-actions { display: flex; align-items: center; gap: 4px; }
-      #a11y-close, #a11y-collapse { background: none; border: none; color: #666; cursor: pointer; font-size: 18px; line-height: 1; padding: 2px 4px; border-radius: 4px; transition: color .15s; }
-      #a11y-close:hover, #a11y-collapse:hover { color: #fff; }
+      #a11y-close { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: none; border: none; color: #a1a1aa; cursor: pointer; font-size: 20px; line-height: 1; border-radius: 8px; transition: color .15s, background .15s; }
+      #a11y-close:hover { color: #fff; background: rgba(255,255,255,.12); }
+      #a11y-collapse { position: fixed; width: 24px; height: 24px; border-radius: 50%; background: #fff; color: #111; border: 2px solid ${color}; cursor: pointer; font-size: 16px; line-height: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,.35); transition: transform .15s; }
+      #a11y-collapse:hover { transform: scale(1.15); }
+      #a11y-collapse[hidden] { display: none; }
       #a11y-body { padding: 12px 16px 0; }
       #a11y-panel .a11y-section-label { display: block; font-size: 10px !important; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #999; margin: 14px 0 8px; }
       .a11y-font-seg { display: flex; background: #f2f2f2; border-radius: 8px; padding: 3px; gap: 2px; margin-bottom: 4px; }
@@ -101,6 +104,14 @@
     btn.innerHTML = ICON_ACCESSIBILITY;
     applyCoordStyle(btn);
 
+    // כפתור כיווץ — גלוי על העיגול הצף עצמו (לא בתוך הפאנל).
+    const collapseBtn = document.createElement('button');
+    collapseBtn.id = 'a11y-collapse';
+    collapseBtn.title = 'כווץ';
+    collapseBtn.setAttribute('aria-label', 'כווץ');
+    collapseBtn.innerHTML = '«';
+    document.body.appendChild(collapseBtn);
+
     const panel = document.createElement('div');
     panel.id = 'a11y-panel';
     panel.hidden = true;
@@ -114,7 +125,6 @@
       <div id="a11y-header">
         <span id="a11y-header-title">הגדרות נגישות</span>
         <span id="a11y-header-actions">
-          <button id="a11y-collapse" title="כווץ" aria-label="כווץ">«</button>
           <button id="a11y-close" title="סגור" aria-label="סגור">✕</button>
         </span>
       </div>
@@ -144,6 +154,9 @@
     document.body.appendChild(panel);
     btn.style.bottom = pos.bottom + 'px';
     btn.style.zIndex = pos.zIndex;
+    collapseBtn.style.left = (24 + size - 12) + 'px';
+    collapseBtn.style.bottom = (pos.bottom + size - 12) + 'px';
+    collapseBtn.style.zIndex = pos.zIndex + 1;
     const panelBottom = window.YBCoordinator ? window.YBCoordinator.getStackTop('left') + 8 : pos.bottom + 56 + 10;
     panel.style.bottom = panelBottom + 'px';
     panel.style.zIndex = pos.zIndex + 1;
@@ -154,6 +167,7 @@
       btn.innerHTML = collapsed ? ICON_CHEVRON : ICON_ACCESSIBILITY;
       btn.title = collapsed ? 'הרחב נגישות' : 'נגישות';
       btn.setAttribute('aria-label', collapsed ? 'הרחב נגישות' : 'נגישות');
+      collapseBtn.hidden = collapsed;
     }
     renderCollapsed();
 
@@ -172,7 +186,7 @@
     panel.querySelector('#a11y-close').addEventListener('click', () => { panel.hidden = true; });
 
     // כיווץ — סוגר את הפאנל ומכווץ את הכפתור לרצועה.
-    panel.querySelector('#a11y-collapse').addEventListener('click', () => {
+    collapseBtn.addEventListener('click', () => {
       collapsed = true;
       localStorage.setItem(COLLAPSE_KEY, '1');
       panel.hidden = true;
