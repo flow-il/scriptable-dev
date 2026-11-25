@@ -1,6 +1,15 @@
 (function () {
   'use strict';
   // bidex@1.1.0.js — Loader דק (מבוסס על 1.0.1).
+
+  // ping first-seen (best-effort) — איזה דומיין טוען את ה-bidex loader. data-ping מחליף את היעד.
+  var PING_URL = (document.currentScript && document.currentScript.getAttribute('data-ping')) || 'https://api.bidex.co.il/api/scriptable/ping';
+  var PING_SCRIPT = document.currentScript || document.querySelector('script[src*="bidex@"]');
+  var BIDEX_VERSION = (PING_SCRIPT && (PING_SCRIPT.src.match(/@([\d.]+)\.js/) || [])[1]) || '';
+  try {
+    fetch(PING_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ addon: 'bidex', host: location.hostname, version: BIDEX_VERSION }), keepalive: true }).catch(function () {});
+  } catch (e) { /* לא קריטי */ }
+
   // ה-widget האמיתי חי ב-server: https://api.bidex.co.il/widget.js (מקור יחיד).
   //
   // חדש ב-1.1.0:
