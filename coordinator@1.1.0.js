@@ -26,8 +26,16 @@
   const styleStr = (script && script.getAttribute('data-style')) || '';
 
   const stacks = { left: MARGIN, right: MARGIN };
-  const registered = {}; // id -> { id, side, size, hidden, order }
+  const registered = {}; // id -> { id, side, size, hidden, autoHidden, order, onShow, onHide }
   let zCounter = 99900;
+
+  // ping first-seen (best-effort) — איזה דומיין טוען את הקואורדינטור. data-ping מחליף את היעד.
+  const PING_URL = (script && script.getAttribute('data-ping')) || 'https://api.bidex.co.il/api/scriptable/ping';
+  try {
+    const payload = JSON.stringify({ addon: 'coordinator', host: location.hostname });
+    if (navigator.sendBeacon) navigator.sendBeacon(PING_URL, payload);
+    else fetch(PING_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true }).catch(function () {});
+  } catch (e) { /* לא קריטי */ }
 
   /** אוסף עיצוב — קיצורי-הדרך + ה-CSS הגולמי (ה-CSS הגולמי מנצח). */
   function buildStyle() {
@@ -71,7 +79,7 @@
     register: function (id, options) {
       const side = (options && options.side) || 'left';
       const size = (options && options.size) || globalSize || 56;
-      registered[id] = { id: id, side: side, size: size, hidden: false, order: Object.keys(registered).length };
+      registered[id] = { id: id, side: side, size: size, hidden: false, autoHidden: false, order: Object.keys(registered).length, onShow: options && options.onShow, onHide: options && options.onHide };
       recompute();
       const w = registered[id];
       return { bottom: w.bottom, zIndex: w.zIndex, style: style };
@@ -79,14 +87,29 @@
     /** הסתרת ווידג'ט — סוגרת את הרווח (הבאים עולים למעלה). מחזיר false אם לא קיים. */
     hide: function (id) {
       if (!registered[id]) return false;
-      registered[id].hidden = true;
-      recompute();
+      const w = registered[id];
+      if (!w.hidden) { w.hidden = true; w.autoHidden = false; if (w.onHide) w.onHide(); recompute(); }
       return true;
     },
     /** הצגה מחדש של ווידג'ט מוסתר. מחזיר false אם לא קיים. */
     show: function (id) {
       if (!registered[id]) return false;
-      registered[id].hidden = false;
+      const w = registered[id];
+      if (w.hidden) { w.hidden = false; w.autoHidden = false; if (w.onShow) w.onShow(); recompute(); }
+      return true;
+    },
+    /** כשפאנל של תוסף נפתח — מסתיר את שאר הכפתורים; כשנסגר — מחזיר (רק את מי שהוא הסתיר אוטומטית). */
+    setPanelOpen: function (id, isOpen) {
+      if (!registered[id]) return false;
+      for (const otherId of Object.keys(registered)) {
+        if (otherId === id) continue;
+        const w = registered[otherId];
+        if (isOpen) {
+          if (!w.hidden) { w.hidden = true; w.autoHidden = true; if (w.onHide) w.onHide(); }
+        } else if (w.autoHidden) {
+          w.autoHidden = false; w.hidden = false; if (w.onShow) w.onShow();
+        }
+      }
       recompute();
       return true;
     },

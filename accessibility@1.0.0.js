@@ -20,8 +20,21 @@
   // כיווץ — מתחיל מכווץ אם ביקשו (data-collapsed) או שנשמר כך.
   let collapsed = noCoordinator && (!!(script && script.hasAttribute('data-collapsed')) || localStorage.getItem(COLLAPSE_KEY) === '1');
 
+  // ping first-seen (best-effort) — איזה דומיין טוען את הנגישות. data-ping מחליף את היעד.
+  const PING_URL = (script && script.getAttribute('data-ping')) || 'https://api.bidex.co.il/api/scriptable/ping';
+  try {
+    const payload = JSON.stringify({ addon: 'accessibility', host: location.hostname });
+    if (navigator.sendBeacon) navigator.sendBeacon(PING_URL, payload);
+    else fetch(PING_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true }).catch(function () {});
+  } catch (e) { /* לא קריטי */ }
+
   const pos = (!noCoordinator && window.YBCoordinator)
-    ? window.YBCoordinator.register('a11y', { side: 'left', size: size })
+    ? window.YBCoordinator.register('a11y', {
+        side: 'left',
+        size: size,
+        onShow: () => { const b = document.getElementById('a11y-btn'); if (b) b.style.display = ''; },
+        onHide: () => { const b = document.getElementById('a11y-btn'); if (b) b.style.display = 'none'; },
+      })
     : { bottom: 80, zIndex: 99998, style: {} };
   const coordStyle = pos.style || {};
 
@@ -187,10 +200,11 @@
         return;
       }
       panel.hidden = !panel.hidden;
+      if (window.YBCoordinator) window.YBCoordinator.setPanelOpen('a11y', !panel.hidden);
       if (!panel.hidden) document.dispatchEvent(new CustomEvent('ybwidget:open', { detail: { id: 'a11y' } }));
     });
     document.addEventListener('ybwidget:open', function (e) { if (e.detail.id !== 'a11y') panel.hidden = true; });
-    panel.querySelector('#a11y-close').addEventListener('click', () => { panel.hidden = true; });
+    panel.querySelector('#a11y-close').addEventListener('click', () => { panel.hidden = true; if (window.YBCoordinator) window.YBCoordinator.setPanelOpen('a11y', false); });
 
     // כיווץ — סוגר את הפאנל ומכווץ את הכפתור לרצועה בקצה המסך.
     if (collapseBtn) {
