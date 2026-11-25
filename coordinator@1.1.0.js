@@ -30,11 +30,10 @@
   let zCounter = 99900;
 
   // ping first-seen (best-effort) — איזה דומיין טוען את הקואורדינטור. data-ping מחליף את היעד.
+  // ⚠️ fetch (לא sendBeacon) — sendBeacon שולח text/plain ⇒ השרת לא מפרס את ה-JSON.
   const PING_URL = (script && script.getAttribute('data-ping')) || 'https://api.bidex.co.il/api/scriptable/ping';
   try {
-    const payload = JSON.stringify({ addon: 'coordinator', host: location.hostname });
-    if (navigator.sendBeacon) navigator.sendBeacon(PING_URL, payload);
-    else fetch(PING_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true }).catch(function () {});
+    fetch(PING_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ addon: 'coordinator', host: location.hostname }), keepalive: true }).catch(function () {});
   } catch (e) { /* לא קריטי */ }
 
   /** אוסף עיצוב — קיצורי-הדרך + ה-CSS הגולמי (ה-CSS הגולמי מנצח). */
